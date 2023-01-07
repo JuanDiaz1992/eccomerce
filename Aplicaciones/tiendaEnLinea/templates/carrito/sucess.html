@@ -1,0 +1,15 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %} Finalizado {% endblock %}
+{% block content %}
+<section class="tablaInfor">
+    <div class="tablaInfor_container flexColumnStart">
+        <h2>Gracias por su compra</h2>
+        <p>Su pedido quedó con el número de orden <span class="alert alert-success text-center">{{pedido}}</span></p>
+        <p>Trabajaremos para hacerlo llegar lo más pronto</p>
+
+        <a class="btn btn-primary" href="{% url 'tiendaEnLinea:index'%}">Volver a la tienda</a>
+        
+    </div>
+</section>
+{% endblock %}

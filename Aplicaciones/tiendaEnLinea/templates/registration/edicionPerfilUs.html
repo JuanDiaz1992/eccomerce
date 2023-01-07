@@ -1,0 +1,18 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %} Gestión de usuario {% endblock %}
+{% block content %}
+    <section class="section_form">
+        <picture>
+            <img src="{% static 'img/Logo/logo.png' %}" class="logo_login" alt="">
+        </picture>
+        <form class="form-login" method="POST">        
+            {% csrf_token %}  
+            <h5>Edición de perfil</h5>
+            <table class="registro__container">  
+                {{ form.as_table }}  
+            </table>
+            <button class="buttons button--registro" type="submit">Modificar</button>
+        </form>
+    </section>
+{% endblock %}

@@ -1,0 +1,71 @@
+.wi{
+    width: 100%;
+}
+p,h1,h2,h3,h4,h5{
+    color: rgb(71, 71, 71);
+}
+
+
+.carrito__containe--item{
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.carrito__container__picture{
+    display: flex;
+    justify-content: center;
+    width: 160px;
+    height: 130px;
+}
+.carrito__container__picture--item{
+    object-fit: contain;
+}
+
+.carrito__containe--nombre{
+    width: 55%;
+}
+
+.carrito__containe--buttons__container{
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    justify-content: center;
+    align-items: center;
+}
+.carrito__containe--buttons{
+    border: 1px solid rgba(0,0,0,.1);
+    width: 110px;
+    display: flex;
+    justify-content: center;
+}
+.buttons-item{
+    margin: 3px 13px;
+    
+}
+.stockCarty{
+    font-weight: 300;
+    font-size: 14px;
+    color: #999;
+    margin-top: 5px;
+}
+.carrito__containe--costos{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: unset;
+    width: 130px;
+}
+
+.carrito__containe--total{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+}
+
+.costoUnidad{
+    padding-left: 20px;
+}

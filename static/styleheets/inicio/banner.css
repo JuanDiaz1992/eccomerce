@@ -1,0 +1,31 @@
+.index{
+	margin-top: 80px;
+}
+
+.carouselContainerHome{
+	width: 100%;
+}
+
+.alto{
+	height: 400px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.img__carrousel{
+	object-fit: cover;
+	height: 400px;
+    width: 100%;
+}
+
+.slide{
+	position: relative;
+}
+
+.finalizada{
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    background-color: rgb(13 110 253 / 25%);
+}

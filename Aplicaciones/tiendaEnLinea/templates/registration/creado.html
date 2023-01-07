@@ -1,0 +1,23 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %} Gestión de usuario {% endblock %}
+{% block content %}
+    <section class="section_form">
+        <picture>
+            <img src="{% static 'img/Logo/logo.png' %}" class="logo_login" alt="">
+        </picture>
+        <div class="form-login">
+            <h4>Bienvenido</h4>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="messages">
+                        <p class="alert alert-success center" role="alert"> {{ message }} </p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <a class="link-boton buttons" href="{% url 'tiendaEnLinea:login'%}">Iniciar Sesión</a>
+        </div>
+    </section>
+{% endblock %}
+
+

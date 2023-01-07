@@ -1,0 +1,60 @@
+{% extends 'base/base.html' %}
+{% block title %} Carrito {% endblock %}
+{% block content %}
+    {% load humanize %}
+    <section class="tablaInfor">
+        <div class="tablaInfor_container flexColumnStart">
+            {% if request.session.carro.items %}
+                {% for key,value in request.session.carro.items %}
+                    <div class="carrito__containe--item">
+                        <a href="{% url 'tiendaEnLinea:detail' value.producto_id %}">
+                            <div class="carrito__container__picture">
+                                <img class="carrito__container__picture--item" src="{{value.imagen}}" alt="imagen">
+                            </div>
+                        </a>
+                        <div class="carrito__containe--nombre">
+                            <a href="{% url 'tiendaEnLinea:detail' value.producto_id %}">{{value.nombre}}</a>
+                        </div>
+                        <div class="carrito__containe--buttons__container">
+                            <div class="carrito__containe--buttons">
+                                {% if value.cantidad == value.stock %}
+                                    <p class="buttons-item"> </p>
+                                {% else %}
+                                    <a class="buttons-item" href="{% url 'tiendaEnLinea:agregar' value.producto_id %}">+</a>
+                                {% endif %}
+                                <h5 class="buttons-item">{{value.cantidad}}</h5>
+                                <a class="buttons-item" href="{% url 'tiendaEnLinea:restar' value.producto_id %}">-</a><br>
+                            </div>
+                            <p class="stockCarty">{{value.stock}} disponibles</p>
+                        </div>
+                        <div class="carrito__containe--costos">
+                            <h5>Precio/u</h5>
+                            <p class="costoUnidad">${{value.precioInicial|intcomma}}</p>
+                            <h5>Subtotal</h5>
+                            <p class="costoUnidad">${{value.precio|intcomma}}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="carrito__containe--total">
+                    <div>
+                        <div>
+                            <p>El total de la compra es de ${{importe_total_carro|intcomma}} </p>
+                            <p>Cantidad total de items es de {{importe_CantTotal_carro|intcomma}} </p>
+                        </div>
+                        <div>
+                            <a class="btn btn-primary" href="{% url 'tiendaEnLinea:pedidoProcesado'  %}" class="boton eliminar">Hacer Pedido</a>
+                            <a class="btn btn-secondary" href="{% url 'tiendaEnLinea:limpiar'  %}" class="boton eliminar">Vaciar Carrito</a>    
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="alert alert-warning text-center wi">
+                    <h2>El carrito de compras está vacío</h2>
+                    <h3>Descubre nuestras promociones en la tienda</h3>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}
+
+

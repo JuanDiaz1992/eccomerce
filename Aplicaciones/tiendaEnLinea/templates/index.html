@@ -1,0 +1,91 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %} Inicio {% endblock %}
+{% block content %}
+    <section class="index">
+                                            <!--Mensajes-->
+        {% if messages %}
+            {% for i in messages %}
+                <p class="finalizada">{{i}}</p>
+            {% endfor %}
+        {% endif %}
+                                            <!--Carrusel Fotos-->
+        <div class="carouselContainerHome">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {% for i in slider %}
+                        <div class="carousel-item alto active ">
+                            <img class="img__carrousel" src="{{i.sliderImg.url}}" class="d-block " alt="...">
+                        </div>
+                    {% endfor %}
+                    {% for i in sliderall %}
+                        <div class="carousel-item alto">
+                            <img class="img__carrousel" src="{{i.sliderImg.url}}" class="d-block " alt="...">
+                        </div>
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </section>
+                                            <!--Zona Categorías-->
+    <section class="section1">
+        {% for i in categoria %}
+            <a class="section1__div dorado" href="{% url 'tiendaEnLinea:categorias' i.slug %}">
+                <picture><img src="{{i.imagen.url}}" alt="shoes">
+                </picture>
+                <p class="section1__div__p">{{ i.nombre }}</p>
+            </a>
+        {% endfor %}
+    </section>  
+                                            <!--Zona de los últimos 15 productos-->
+    <section class="section2">
+        <div class="section2__div__--container">
+            <div class="section2__div__div--h3">
+                <h3>Nuevos Productos</h3>
+                <div class="linea-dorada"></div>
+            </div>            
+            <div class="section2__div__div--articles">
+                {% for i in productos %}
+                    <a class="section2__articles section2__articles--item" href="{% url 'tiendaEnLinea:detail' i.id %}">
+                        <div class="card__grid">
+                            <picture class="section2__articles__picture">
+                                <img src="{{i.imagen.url}}" alt="imagen">
+                            </picture>
+                            <h5 class="bg-3 marca">Por {{i.marca}}</h5>
+                            <p class="section2__articles__p1 bg-3">{{i.nombre}}</p>
+                            <div class="precio">
+                                {% load humanize %}
+                                {% if i.descuento == 0 %}
+                                    <h5 class="bg-2">${{i.precio|intcomma}} </h5>
+                                    <p class="sinDescuento"></p>
+                                    <div>
+                                        <h5 class="bg-2"></h5> 
+                                        <p class="descuento"></p>
+                                    </div>    
+                                {% else %}
+                                    <p class="sinDescuento">${{i.PrecioSinDescuento}}</p>
+                                    <div class="descuento__detalle">
+                                        <h5 class="bg-2">${{i.precio|intcomma}} </h5> 
+                                        <p class="descuento">{{i.descuento}}% OFF</p>
+                                    </div>
+                                {% endif %}
+                            </div >
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+            <div class="section2__div__div--botonContainer">
+                <button class="SeeMore">See More</button>
+            </div>
+        </div>
+    </section>   
+{% endblock %}
+

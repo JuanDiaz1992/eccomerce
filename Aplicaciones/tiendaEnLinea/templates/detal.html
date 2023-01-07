@@ -1,0 +1,129 @@
+{% extends 'base/base.html' %}
+{% block title %} Detalle de producto {% endblock %}
+{% block content %}
+    <section class="detalle_container">
+                                                <!--Banner categoría-->
+        <div class="imagenBannerCategoria">
+            {% if banner != '' %}
+                <img class="imagenBannerCategoria--item" src="{{banner.url}}" alt="..S">
+            {% else %}
+
+            {% endif %}
+        </div>
+        <div class="abosoluteCategoria">
+            <div class="listado detalle_lista">
+                {% for i in productos %}
+                    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    {% if messages %}
+                        {% for m in messages %}
+                        <script>
+                            Swal.fire({
+                                "title":"{{i}}",
+                                "text": "{{m}}",
+                                "icon": "{{m.tags}}"
+                            })
+                        </script>
+                    {% endfor %}
+                {% endif %}
+                                            <!--Carrusel Fotos-->
+                <div class="carouselContainer">
+                    <div id="carouselExampleControls" class="carouselContainer--carousel carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active carousel-item--detalle">
+                                <img src="{{i.imagen.url}}" class="d-block w-100 carousel--img" alt="...">
+                            </div>
+                            {% if i.imagenes.count == 1 %}
+                                <div class="carousel-item carousel-item--detalle">
+                                <img src="{{i.imagenes.first.imagen.url}}" class="d-block w-100 carousel--img" alt="...">
+                                </div>
+                            {% elif i.imagenes.count > 1 %}
+                                {% for m in i.imagenes.all %}
+                                    <div class="carousel-item carousel-item--detalle">
+                                        <img src="{{m.imagen.url}}" class="d-block w-100 carousel--img" alt="...">
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+                                            <!--Detalles articulo-->
+                <div class="categoria__text--detalle">
+                    <h3 class="bg-2 size1">{{i.nombre}}</h3>
+                    <p class="bg-3 marca marca_detalle">Por {{i.marca}}</p>
+                    <div class="precio">
+                        {% load humanize %}
+                        {% if i.descuento == 0 %}
+                            <h5 class="bg-2 precioDetalle">${{i.precio|intcomma}} </h5>
+                            <p class="sinDescuento"></p>
+                            <div>
+                                <h5 class="bg-2"></h5> 
+                                <p class="descuento"></p>
+                            </div>    
+                        {% else %}
+                            <p class="sinDescuento">${{i.PrecioSinDescuento}}</p>
+                            <div class="descuento__detalle">
+                                <h5 class="bg-2 precioDetalle">${{i.precio|intcomma}} </h5> 
+                                <p class="descuento">{{i.descuento}}% OFF</p>
+                            </div>
+                        {% endif %}
+                        <p class="stock">{{i.stock}} disponibles</p>
+                        {% if request.user.is_authenticated %}
+                            <a class="btn btn-primary ancho" href="{% url 'tiendaEnLinea:agregarDetalle' i.id%}">
+                                <i class="fa-sharp fa-solid fa-cart-shopping"></i> Agregar al carrito
+                            </a>
+                        {% else %}
+                            <h3 class="alert alert-info">Inicia sesión para comprar este producto</h3>
+                        {% endif %}
+                    </div >
+                </div>
+            </div>                    
+            <div class="info_producto">
+                <h4>Lo que tienes que saber sobre este producto</h4>
+                <p>{{i.descripcion|linebreaks}}</p>
+            </div>
+                                            <!--Comentarios articulo-->
+            {% if request.user.is_authenticated %}
+                <div class="opinion__container">
+                    <h3>Dejanos tu opinión sobre este producto</h3>
+                    <form name= "comments" method="POST" class="opinion" action="">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="opinionButton">Enviar</button>
+                    </form>
+                </div>
+            {% else %}
+                <div class="opinion__container">
+                    <h3>Inicia sesión para dejar una reseña de este producto</h3>
+                </div>
+            {% endif %}
+            <div class="otrasopiniones__container">
+                <h3>Opiniones del producto</h3>
+                {% if comentarios %}
+                    {% for n in comentarios %}
+                        <p class="otrasopiniones__container--fecha">{{n.created_at | date:"d/m/Y"}}</p>
+                        <p class="comentarios">{{n}}</p>
+                    {% endfor %}
+                {% else %}
+                        <p>Aun no hay comentarios para este producto, se el primero en comentar</p>  
+                {% endif %}
+            </div>
+                {% endfor %}  
+            {% for i in productos %}
+                <div>
+                    {% empty %}
+                        <h4>No hay productos en esta categoria</h4>
+                </div>
+            {% endfor %}  
+        </div>
+    </section>
+{% endblock %}
+
+

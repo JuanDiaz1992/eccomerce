@@ -1,0 +1,67 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %} listado de productos {% endblock %}
+{% block content %}
+    <section class="banner__div__containerBannerCategoria">
+            <picture class="banner__div__picture--banner2">
+                <img src="{% static 'img/banner2.jpg' url %}" alt="modelo">
+            </picture>
+    </section>
+
+    <section class="categoria__section">
+        <div>
+            <p>{{nombreCat}}</p>
+        </div>
+        <div class="listado">
+            {% for i in productos %}
+            <div class="card">
+                <a href="{% url 'tiendaEnLinea:detail' i.id %}">
+                    <picture class="card__picture--container">
+                        <img class="categoria__imagen" src="{{i.imagen.url}}" alt="imagen">
+                    </picture>
+                    
+                    <div class="categoria__text">
+                        <h5 class="bg-3 marca">Por {{i.marca}}</h5>
+                        <p class="bg-2">{{i.nombre}}</p>
+                        <div class="precio">
+                            {% load humanize %}
+                            {% if i.descuento == 0 %}
+                            <h5 class="bg-2">${{i.precio|intcomma}} </h5>
+                            <p class="sinDescuento"></p>
+                            <div>
+                                <h5 class="bg-2"></h5> 
+                                <p class="descuento"></p>
+                            </div>    
+                            {% else %}
+                            <p class="sinDescuento">${{i.PrecioSinDescuento}}</p>
+                            <div class="descuento__detalle">
+                                <h5 class="bg-2">${{i.precio|intcomma}} </h5> 
+                                <p class="descuento">{{i.descuento}}% OFF</p>
+                            </div>
+                            
+                            {% endif %}
+                            
+                        </div >
+                    </div>
+                </div>
+                </a>
+            {% endfor %}  
+            {% for i in productos %}
+            <div>
+                {% empty %}
+                <h4>No hay productos en esta categoria</h4>
+            </div>
+            {% endfor %}  
+
+
+
+
+
+
+
+        </div>
+
+    </section>
+{% endblock %}
+
+

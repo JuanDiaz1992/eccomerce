@@ -1,0 +1,58 @@
+{% load static %}
+{% load humanize %}
+<div class="nav_container">
+    <a href="{% url 'tiendaEnLinea:index'%}">
+        <picture>
+            <img src="{% static 'img/Logo/logo.png' %}" class="logo_nav" alt="">
+        </picture>
+    </a>
+    <form class="container__buscador " action="{% url 'tiendaEnLinea:search' %}">
+        {% csrf_token %}
+        <input class="buscador" type="search" name="busqueda" placeholder="Search">
+        <button class="boton_buscar" type="submit">Buscar</button>
+    </form>
+    <button class="nav_toggle" aria-label="Abrir Menú">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+            <!-- Menu -->
+    <ul class="nav-menu .nav-menu_visible">
+        <li	li class="nav-menu-item">
+            <a href="{% url 'tiendaEnLinea:index'%}" class="nav-menu-link nav-links nav-menu-link_active">Home</a>
+        </li>
+        <li class="nav-menu-item">
+            <a href="{% url 'tiendaEnLinea:categorias' %}" class="nav-menu-link nav-links ">Categorias</a>
+        </li>
+        <li class="nav-menu-item">
+            <a href="#" class="nav-menu-link nav-links ">Promociones</a>
+        </li>
+            <!--Si el usuario tiene sesión iniciada-->
+        {% if request.user.is_authenticated %}
+            <li class="nav-menu-item dropdown hidden-movil">
+                <a href="#" class="nav-menu-link nav-links usuario">{{user.perfilusuario.nombre1}} {{user.perfilusuario.primerApellido}}</a>       
+                <div class="dropdown-content">
+                    <a class="cerrarSesion" href="{% url 'tiendaEnLinea:ModificarPerfil' %}">Perfil</a>
+                    <a class="cerrarSesion" href="{% url 'tiendaEnLinea:listaPedidosUsuario' %}">Pedidos</a>
+                    <a class="cerrarSesion" href="{% url 'tiendaEnLinea:logout' %}">Cerrar Sesión</a>
+                </div>
+            </li>
+            <li class="nav-menu-item hidden-escritorio">
+                <a href="#" class="nav-menu-link nav-links usuario">{{user.perfilusuario.nombre1}} {{user.perfilusuario.primerApellido}}</a>
+            </li>
+            <li class="nav-menu-item hidden-escritorio">
+                <a class="nav-menu-link nav-links " href="{% url 'tiendaEnLinea:logout' %}">Cerrar Sesión</a>
+            </li>
+            <li class="nav-menu-item bag">
+                {% if request.session.carro.items %}
+                    <a  class="padding nav-links " href="/mycart" > <i class="bi bi-cart2 tamanho"></i><p>{{importe_CantTotal_carro|intcomma}}</p> </a>
+                {% else %}
+                    <a  class="padding nav-links " href="/mycart" > <i class="bi bi-cart2 tamanho"></i><p>0</p> </a>
+                {% endif %}
+            </li>    
+            <!--El usuario no a iniciado sesión-->
+        {% else %}
+            <li class="nav-menu-item">
+                <a href="{% url 'tiendaEnLinea:login' %}" class="nav-menu-link nav-links ">Identificate</a>
+            </li>
+        {% endif %}
+    </ul> 
+</div>

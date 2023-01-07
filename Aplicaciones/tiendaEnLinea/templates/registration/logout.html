@@ -1,0 +1,36 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %} Gestión de usuario {% endblock %}
+{% block content %}
+
+<section class="section_form">
+    <picture>
+        <img src="{% static 'img/Logo/logo.png' %}" class="logo_login" alt="">
+    </picture>
+    <div class="form-login">
+            <h5>Te has deslogueado del sistema</h5>
+        <a class="link-boton buttons" href="{% url 'tiendaEnLinea:login'%}">Logueate de nuevo</a>
+        <a class="link-boton buttons" href="{% url 'tiendaEnLinea:index'%}">ir a la tienda</a>
+        <div class="links_container">
+            <p><a href="{% url 'tiendaEnLinea:register' %}">¿No tiene cuenta? registrarte</a></p>
+        </div>
+        
+
+        <div class="redes_container--principal">
+            <p class="estamos">Estamos en:</p>
+            <div>
+                <a href="https://www.instagram.com/comunidadciaf/" target="blank">
+                    <i class="fa-brands fa-instagram redsocial-1"></i>
+                </a>
+                <a href="https://twitter.com/ComunidadCIAF" target="blank">
+                    <i class="fa-brands fa-twitter redsocial-2"></i>
+                </a>
+                <a href="https://web.facebook.com/ComunidadCIAF?_rdc=1&_rdr" target="blank">
+                    <i class="fa-brands fa-facebook redsocial-3"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

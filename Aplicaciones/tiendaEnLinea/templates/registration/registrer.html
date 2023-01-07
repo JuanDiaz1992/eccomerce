@@ -1,0 +1,27 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %} Gestión de usuario {% endblock %}
+{% block content %}
+<section class="section_form">
+    <picture>
+        <img src="{% static 'img/Logo/logo.png' %}" class="logo_login" alt="">
+    </picture>
+
+    <form class="form-login" method="POST">
+                
+        {% csrf_token %}  
+        <h5>Bienvenido</h5>
+            <table class="registro__container">  
+                {{ form.as_table }}  
+                <tr>  
+                    <td></td>  
+                    
+                </tr>  
+            </table>
+
+    <button class="buttons button--registro" type="submit">Registrate</button>
+    <a href="{% url 'tiendaEnLinea:login'%}">Si ya estás registrado has click aquí</a>
+    </form>
+</section>
+
+{% endblock %}

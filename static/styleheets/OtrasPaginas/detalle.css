@@ -1,0 +1,196 @@
+
+p{
+	margin: 0;
+	padding: 0;
+}
+
+.imagenBannerCategoria{
+    width: 100%;
+}
+.imagenBannerCategoria--item{
+    width: 100%;
+    object-fit: cover;
+}
+
+.detalle_container{
+    position: relative;
+    background-color: #F1F1F1;
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+
+}
+
+
+.detalle_lista{
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 15px;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.carouselContainer{
+    padding: 0 74px;
+}
+.carouselContainer--carousel{
+    width: 460px;
+    background-color: rgb(241 241 241);
+    margin-top: 50px;
+}
+.marca_detalle{
+    font-size: 18px;
+}
+.ancho{
+    width: 200px;
+}
+
+
+.precioDetalle{
+    font-size: 36px;
+}
+
+.relativeCategoria{
+    position: relative;
+    background-color: #F1F1F1;
+    height: 100vh;
+}
+.abosoluteCategoria{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    padding: 25px;
+    background-color: #fff;
+    position: absolute;
+    z-index: 2;
+    top: 80px;
+    border-radius: 5px;
+    -webkit-border-radius: 4px;
+    -webkit-box-shadow: 0 1px 2px 0 rgb(0 0 0 / 25%);
+    box-shadow: 0 1px 2px 0rgba(0,0,0,.25);
+    margin-bottom: 24px;
+    min-width: 800px;
+    
+
+}
+
+
+
+.carousel-item--detalle{
+    height: 300px;
+    background-color: white;
+}
+
+.carousel--img{
+    object-fit: contain;
+}
+
+.info_producto,.opinion__container,.otrasopiniones__container{
+    margin-top: 40px;
+    padding: 25px 5px 0 0; 
+    border-top: 1px solid rgba(0,0,0,.1) ;
+    width: 60%;
+}
+
+.stock{
+    font-size: .80em;
+    color: #77a464;
+    padding: 0;
+    margin: 0;
+
+}
+.opinion{
+    display: flex;
+}
+.opinion textarea{
+    padding: 15px;
+}
+
+
+.opinion p{
+    width: 60%;
+    padding: 0;
+    margin: 0;
+}
+.opinionInput{
+    text-align: start;
+    width: 100%;
+    display: flex;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    white-space: nowrap;
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem 0 0 0.25rem;
+}
+.opinionButton{
+    color: #fff;
+    background-color: #198754;
+    border-color: #198754;
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0 0.25rem  0.25rem 0;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.otrasopiniones__container--fecha{
+    width: 100%;
+    color: rgba(0,0,0,.55);
+    font-size: 12px;
+    text-align: right;
+}
+
+.comentarios{
+    width: 100%;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    color: rgba(0,0,0,.9);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.25;
+    padding: 8px 0 20px 0;
+
+}
+
+@media(max-width:1006px){
+.abosoluteCategoria{
+    padding: 60px;
+}
+.detalle_lista{
+    flex-direction: column;
+}
+
+.categoria__text--detalle{
+    width: 100%;
+}
+
+.size1{
+    text-align: center;
+    font-size: 30px;
+}
+
+.info_producto, .opinion__container, .otrasopiniones__container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 25px 20px 0 20px;
+}
+
+}

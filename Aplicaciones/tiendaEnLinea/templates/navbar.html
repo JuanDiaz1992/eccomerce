@@ -39,7 +39,7 @@
                 <a href="#" class="nav-menu-link nav-links usuario">{{user.perfilusuario.nombre1}} {{user.perfilusuario.primerApellido}}</a>
             </li>
             <li class="nav-menu-item hidden-escritorio">
-                <a class="nav-menu-link nav-links " href="{% url 'tiendaEnLinea:logout' %}">Cerrar Sesión</a>
+                <a class="nav-menu-link nav-links" href="{% url 'tiendaEnLinea:logout' %}">Cerrar Sesión</a>
             </li>
             <li class="nav-menu-item bag">
                 {% if request.session.carro.items %}

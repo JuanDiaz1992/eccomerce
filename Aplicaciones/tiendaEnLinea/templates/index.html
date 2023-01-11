@@ -39,7 +39,7 @@
     <section class="section1">
         {% for i in categoria %}
             <a class="section1__div dorado" href="{% url 'tiendaEnLinea:categorias' i.slug %}">
-                <picture><img src="{{i.imagen.url}}" alt="shoes">
+                <picture><img src="{{i.imagen.url}}" alt="" class="logo_categoria">
                 </picture>
                 <p class="section1__div__p">{{ i.nombre }}</p>
             </a>

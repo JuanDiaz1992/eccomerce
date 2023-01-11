@@ -1,14 +1,14 @@
 {% load static %}
 {% load humanize %}
 <div class="nav_container">
-    <a href="{% url 'tiendaEnLinea:index'%}">
+    <a href="{% url 'tiendaEnLinea:index'%}" class="logo_nav_container">
         <picture>
             <img src="{% static 'img/Logo/logo.png' %}" class="logo_nav" alt="">
         </picture>
     </a>
     <form class="container__buscador " action="{% url 'tiendaEnLinea:search' %}">
         {% csrf_token %}
-        <input class="buscador" type="search" name="busqueda" placeholder="Search">
+        <input class="buscador" type="search" name="busqueda" placeholder="Buscar en Romofyi">
         <button class="boton_buscar" type="submit">Buscar</button>
     </form>
     <button class="nav_toggle" aria-label="Abrir Menú">

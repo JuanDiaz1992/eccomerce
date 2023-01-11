@@ -29,3 +29,23 @@
     text-align: center;
     background-color: rgb(13 110 253 / 25%);
 }
+
+@media(max-width:820px){
+	.alto{
+        height: 245px;
+    }
+    .img__carrousel{
+        height: 245px;
+    }
+}
+
+
+@media(max-width:626px){
+    .alto{
+        height: 154px;
+    }
+    .img__carrousel{
+        height: 154px;
+    }
+
+}

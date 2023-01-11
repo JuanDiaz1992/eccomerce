@@ -29,7 +29,16 @@
                         </div>
                         <div class="carrito__containe--costos">
                             <h5>Precio/u</h5>
+                            {% if value.descuento == 0 %}
                             <p class="costoUnidad">${{value.precioInicial|intcomma}}</p>
+                            {% else %}
+                            <p class="sinDescuento">${{value.precioSinDescuento|intcomma}}</p>
+                            <div class="descuento__detalle">
+                                <h5 class="costoUnidad">${{value.precioInicial|intcomma}}</h5> 
+                                <p class="descuento">{{value.descuento}}% OFF</p>
+                            </div>
+                            {% endif %}
+
                             <h5>Subtotal</h5>
                             <p class="costoUnidad">${{value.precio|intcomma}}</p>
                         </div>

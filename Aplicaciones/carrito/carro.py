@@ -16,6 +16,8 @@ class Carro:
                 "nombre":producto.nombre,
                 "precio": str(producto.precio),
                 "precioInicial": str(producto.precio),
+                "descuento": str(producto.descuento),
+                "precioSinDescuento": str(producto.PrecioSinDescuento),
                 "cantidad":1,
                 "stock": producto.stock,
                 "imagen":producto.imagen.url,

@@ -41,3 +41,32 @@
 	text-align: center;
     text-decoration: none;
 }
+
+@media(max-width:820px){
+
+	.section1 {
+		height: 160px;
+
+	}	
+}
+
+@media(max-width:626px){
+
+	.section1 {
+		height: fit-content;
+
+	}
+	
+	.section1__div{
+		width: 100%;
+		padding-top: 13px;
+	}
+	
+	.logo_categoria{
+		width: 40px;
+	}
+	.section1__div__p{
+		font-size: 12px;
+	}
+}
+

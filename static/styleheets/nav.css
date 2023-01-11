@@ -253,3 +253,19 @@
     }
 
 }
+
+@media(max-width:626px){
+    .nav-menu{
+        width: 70%;
+    }
+    .nav_container {
+        padding: 0 12px;
+    }
+    .logo_nav_container{
+        display: none;
+    
+    }
+    .buscador{
+        padding: 14px 0px 14px 9px;
+    }
+}

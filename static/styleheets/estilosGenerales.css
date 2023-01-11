@@ -39,3 +39,9 @@
     width: 199px;
     margin: 5px 0px 5px 0;
 }
+
+@media(max-width:820px){
+    .tablaInfor_container{
+        min-width: 0;
+    }
+}

@@ -12,6 +12,10 @@ class Pedido(models.Model):
     user = models.ForeignKey(User, on_delete= models.CASCADE)
     status = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    precioTotal = models.IntegerField(default=0)
+    direccion = models.CharField(max_length=50,default="")
+    departamento = models.CharField(max_length=50, default = '')
+    ciudad = models.CharField(max_length=50, default="")
     
     def __str__(self) -> str:
         return self.ordernum
@@ -36,7 +40,8 @@ class LineaPedido(models.Model):
     pedido = models.ForeignKey(Pedido, on_delete= models.CASCADE)
     cantidad = models.IntegerField(default=1)
     estadoPedido = models.CharField(max_length=50,choices = estado, default = 'Aceptado')
-    
+    precioUnidad= models.IntegerField(default=0)
+    subTotal= models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 
 

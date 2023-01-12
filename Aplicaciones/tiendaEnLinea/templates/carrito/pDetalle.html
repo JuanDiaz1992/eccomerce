@@ -1,0 +1,56 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %} Detalle de pedidos {% endblock %}
+{% block content %}
+
+    <section class="tablaInfor--detalleP">
+        <div class="tablaInfor_container--detalleP">
+            <div class="tablaInfor_container--ListaP--container1">
+                {% for i in pedidoD %}
+                    <div class="tablaInfor_container-itemDetalle">
+                        <div class="tablaInfor_container--titulo">
+                            <div>
+                                <p>{{i.producto}}</p>
+                                <p>Cantidad: {{i.cantidad}}</p>
+                            </div>
+                            <picture class="detalleP__img__container">
+                                <img src="{{i.producto.imagen.url}}" class="tablaInfor_container-item--img" alt="...">
+                            </picture>
+                        </div>
+                        <div>
+                            {% if i.estadoPedido == 'Aceptado' %}
+                                <p class="color1">{{i.estadoPedido}}</p>
+                            {% elif i.estadoPedido == 'En proceso' %}
+                                <p class="color2">{{i.estadoPedido}}</p>
+                            {% elif i.estadoPedido == 'En envío' %}
+                                <p class="color3">{{i.estadoPedido}}</p>
+                            {% elif i.estadoPedido == 'Pedido entregado' %}
+                                <p class="color4">{{i.estadoPedido}}</p>
+                            {% endif %}
+
+                            <p>Precio por unidad: <span class="precioUnidad">${{i.precioUnidad|intcomma}}</span></p>
+                            {% if i.cantidad > 1 %}
+                                <p>Subtotal de las {{i.cantidad}} unidades: <span class="subTotal">${{i.subTotal|intcomma}}</span></p>
+                            {% endif %}
+
+                        </div>
+                    </div>
+            {% endfor %}
+            </div>
+                
+            <div class="tablaInfor_container--ListaP--container2">
+                <div class="detallCompra">
+                    <h4>Detalle de la compra</h4>
+                    <p class="fecha">Realizada el {{fechaCompra}}</p>
+                    <p>Con la referencia de pago: {{referencia}}</p>
+                    <p>Tú pedido se envió a la dirección:</p>
+                    <p>{{direccion}} en {{ciudad}}, <span class="departamento">{{departamento}}.</span></p>
+                    <p>Total: <span class="pedidoF">$ {{pedidoF|intcomma}}</span></p>
+                </div>
+                
+            </div>
+
+        </div>      
+    </section>
+{% endblock %}

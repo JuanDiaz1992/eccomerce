@@ -14,7 +14,7 @@ class Carro:
             self.carro[producto.id]={
                 "producto_id":producto.id,
                 "nombre":producto.nombre,
-                "precio": str(producto.precio),
+                "precio": producto.precio,
                 "precioInicial": str(producto.precio),
                 "descuento": str(producto.descuento),
                 "precioSinDescuento": str(producto.PrecioSinDescuento),

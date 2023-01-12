@@ -14,6 +14,7 @@
                             </div>
                             <div class="tablaInfor_container-item-second">
                                 <div class="item1">
+                                    <img src="{{i.producto.imagen.url}}" class="tablaInfor_container-item--img" alt="...">
                                     {% if i.estadoPedido == 'Aceptado' %}
                                         <p class="color1">{{i.estadoPedido}}</p>
                                     {% elif i.estadoPedido == 'En proceso' %}
@@ -25,6 +26,7 @@
                                     {% endif %}
                                     
                                     <p>{{i.producto}}</p>
+                                    
                                     <p>Cantidad total de este producto: {{i.cantidad}}</p>
                                 </div>
                                 <div class="orden">
@@ -32,7 +34,7 @@
                                     
                                 </div>
                                 
-                                <a class="btn btn-primary" href="#">Ver detalle</a>
+                                <a class="btn btn-primary" href="{% url 'tiendaEnLinea:detallePedido' i.pedido_id %}">Ver detalle</a>
                             </div>
                             
                         </div>

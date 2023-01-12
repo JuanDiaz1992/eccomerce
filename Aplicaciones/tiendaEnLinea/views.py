@@ -26,7 +26,14 @@ def index(request):
     }
     return render(request,template_name,context)
 
-
+#-------------------------Vista categorias
+def categoriasDisponibles(request):
+    template_name = 'categorias.html'
+    categoria = Categoria.objects.filter(activo=True)
+    contex = {
+        'categoria': categoria
+    }
+    return render(request,template_name,contex)
 
 
 #-------------------------Vista de productos por categoría
@@ -115,10 +122,3 @@ def mycart(request):
 
 
 
-def categoriasDisponibles(request):
-    template_name = 'categorias.html'
-    categoria = Categoria.objects.filter(activo=True)
-    contex = {
-        'categoria': categoria
-    }
-    return render(request,template_name,contex)

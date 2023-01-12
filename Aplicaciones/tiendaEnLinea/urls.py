@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 from .views import index,buscar_categorias,search,detalle,mycart,categoriasDisponibles
 from Aplicaciones.Usuarios.views import Login, LogoutUsuario, register, modificarPerUsuario
-from Aplicaciones.pedidos.views import procesar_pedido,pedidoFinalizado,listaPedidosUsuario
+from Aplicaciones.pedidos.views import procesar_pedido,pedidoFinalizado,listaPedidosUsuario,detallePedido
 from Aplicaciones.carrito.views import agregar_producto,eliminar_producto,restar_producto,limpiar_carro,agregar_desde_detalle
 
 
@@ -39,6 +39,7 @@ urlpatterns = [
     path('pedidoProcesado/',login_required(procesar_pedido), name = 'pedidoProcesado'),
     path('listaPedidos/',login_required(listaPedidosUsuario), name = 'listaPedidosUsuario'),
     path('succes/',login_required(pedidoFinalizado), name = 'succes'),
+    path('detallePedido/<int:pedido_id>',login_required(detallePedido), name = 'detallePedido'),
 
 
 ]

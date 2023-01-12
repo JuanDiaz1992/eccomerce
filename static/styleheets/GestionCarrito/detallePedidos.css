@@ -1,0 +1,74 @@
+.tablaInfor--detalleP{
+    margin-top: 80px;
+}
+
+.tablaInfor_container--ListaP--container2{
+    background: #f5f5f5;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    max-width: 360px;
+    min-height: -moz-available;
+    min-height: -webkit-fill-available;
+    min-height: fill-available;
+    padding: 105px 32px 48px;
+    width: 30%;
+}
+.tablaInfor_container--detalleP {
+    z-index: 2;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+.tablaInfor_container--ListaP--container1{
+    width: 70%;
+    padding: 66px;
+    max-width: 700px;
+}
+
+
+.detallCompra{
+    position: sticky;
+    top: 120px;
+}
+
+.departamento{
+    text-transform: capitalize;
+}
+
+.tablaInfor_container-item--img{
+
+    height: 48px;
+
+}
+
+.tablaInfor_container--titulo{
+    display: flex;
+    justify-content: space-between;
+}
+
+.tablaInfor_container-itemDetalle{
+    width: 90%;
+    max-width: 1080px;
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 7px;
+    -webkit-border-radius: 4px;
+    -webkit-box-shadow: 0 1px 2px 0 rgb(0 0 0 / 25%);
+    box-shadow: 0 1px 2px 0rgba(0,0,0,.25);
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.precioUnidad,.subTotal,.pedidoF{
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+
+.fecha{
+    border-top: 1.5px solid rgb(0 0 0 / 65%);;
+    padding-top: 15px;
+}

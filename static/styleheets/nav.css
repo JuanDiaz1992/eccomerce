@@ -158,7 +158,7 @@
 .buscador{
 
     height: 38px;
-    width: fit-content;
+    width: 200px;
     padding: 14px 32px 14px 16px;
     outline: none;
     border-radius:  0.25rem 0 0 0.25rem   ;

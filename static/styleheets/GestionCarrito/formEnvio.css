@@ -1,0 +1,76 @@
+.section_formEnvios{
+    margin-top: 100px;
+    font-family: Arial, Helvetica, sans-serif;
+
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.formEnvio{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 490px;
+    padding: 35px 61px;
+    background: rgba( 255, 255, 255, 0.5 );
+    box-shadow: 0 8px 32px 0 rgb(31 38 135 / 37%);
+    backdrop-filter: blur( 9px );
+    -webkit-backdrop-filter: blur( 9px );
+    border-radius: 5px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+
+}
+
+.NotasEnvio{
+    height: 120px;
+    background-color: rgb(224, 224, 224);
+    font-size: 14px;
+    color: rgb(0, 0, 0);
+    border: 0;
+    outline: none;
+    border-radius: 0;
+    margin-bottom: 15px;
+    padding: 11px 10px;
+    width: 80%;
+}
+
+.registro__container--envio input{
+    margin-top: 18px;
+    color: rgb(0, 0, 0);
+    border: 0;
+    outline: none;
+    border-radius: 0;
+    margin-bottom: 15px;
+    padding: 11px 10px;
+    font-size: 14px;
+    background-color: rgb(224, 224, 224);
+}
+
+.formEnvio p{
+    text-align: justify;
+}
+
+#id_departamento{
+    height: 35px ;
+}
+
+.formEnvio h5{
+    font-size: 50px;
+    color: #000;
+}
+
+
+@media(max-width:500px){
+    .formEnvio{
+        padding: 35px 10px;
+        width: 100%;
+
+    }
+    .NotasEnvio{
+        width: 84%;
+    }
+}

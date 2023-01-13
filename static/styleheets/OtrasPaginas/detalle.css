@@ -167,6 +167,10 @@ p{
 
 }
 
+.carousel-control-next-icon,.carousel-control-prev-icon{
+    filter:invert(30%);
+}
+
 @media(max-width:1006px){
 .abosoluteCategoria{
     padding: 60px;
@@ -193,4 +197,33 @@ p{
     padding: 25px 20px 0 20px;
 }
 
+
+
+}
+
+@media(max-width:819px){
+    .abosoluteCategoria{
+        min-width: 0;
+
+    }
+    .carouselContainer--carousel{
+        width: 204px;
+    }
+
+    .carousel-item--detalle{
+        height: 204px;
+    }
+}
+
+@media(max-width:607px){
+    .carousel-item--detalle{
+        height: 150px;
+    }
+    .carouselContainer--carousel{
+        width: 160px;
+    }
+    .abosoluteCategoria{
+
+        padding: 0px 15px;
+    }
 }

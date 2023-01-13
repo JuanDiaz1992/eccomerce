@@ -38,15 +38,19 @@
                     </div>
             {% endfor %}
             </div>
-                
+               
             <div class="tablaInfor_container--ListaP--container2">
                 <div class="detallCompra">
                     <h4>Detalle de la compra</h4>
                     <p class="fecha">Realizada el {{fechaCompra}}</p>
                     <p>Con la referencia de pago: {{referencia}}</p>
-                    <p>Tú pedido se envió a la dirección:</p>
+                    <p>Dirección para el envío:</p>
                     <p>{{direccion}} en {{ciudad}}, <span class="departamento">{{departamento}}.</span></p>
-                    <p>Total: <span class="pedidoF">$ {{pedidoF|intcomma}}</span></p>
+                    {% if comentarios != '' %}
+                    <p>Comentarios: {{comentarios}}</p>
+                    {% endif %}
+                    <p>Total de la compra: <span class="pedidoF">$ {{pedidoF|intcomma}}</span></p>
+
                 </div>
                 
             </div>

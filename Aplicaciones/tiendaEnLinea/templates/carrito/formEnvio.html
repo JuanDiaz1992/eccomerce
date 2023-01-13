@@ -1,0 +1,17 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %} Gestión de usuario {% endblock %}
+{% block content %}
+    <section class="section_formEnvios">
+           <form class="formEnvio" method="POST">        
+            {% csrf_token %}  
+            <h5>Detalle de envío</h5>
+            <table class="registro__container--envio">  
+                {{ form.as_table }}  
+                <p>Por favor asegurate de que los datos que ingreses en este formulario estén correctos, ya que usaremos estos datos para el envío de tus productos.</p>
+
+            </table>
+            <button class="buttons button--registro" type="submit">Realizar pedido</button>
+        </form>
+    </section>
+{% endblock %}

@@ -9,7 +9,10 @@
 
 
 }
-
+.logo_categoria{
+    width: 99px;
+    height: 84px;
+}
 
 .banner__div__picture--banner2 img{
     width: 100%;

@@ -7,7 +7,7 @@ from Aplicaciones.tiendaEnLinea.models import Productos,Categoria, imagenesProdu
 # Register your models here.
 
 
-admin.site.register(PerfilUsuario)
+
 
 admin.site.register(sliders)
 admin.site.register(Categoria)
@@ -17,8 +17,8 @@ class ImagenProductoAdmin(admin.TabularInline):
 
 
 class ProductoAdmin(admin.ModelAdmin):
-    list_display = ['nombre','categoria','precio']
-    list_editable = ['precio']
+    list_display = ['nombre','categoria','stock','precio']
+    list_editable = ['precio','stock']
     search_fields = ['nombre']
     list_filter = ['marca','activo']
     list_per_page: 10
@@ -32,11 +32,11 @@ class pedidoList(admin.ModelAdmin):
     search_fields = ['ordernum']
 
 class pedidoListDetalle(admin.ModelAdmin):
-    list_display = ['pedido','estadoPedido','producto','cantidad','user']
+    list_display = ["pedido",'estadoPedido','producto','cantidad','user']
     list_editable = ['estadoPedido']
     list_filter = ['estadoPedido','user']
     list_per_page: 10
-    search_fields = ['pedido']
+    search_fields = ["ForeignKey__pedido"]
     
 
 admin.site.register(Pedido,pedidoList)
@@ -45,3 +45,4 @@ admin.site.register(LineaPedido,pedidoListDetalle)
 
 admin.site.register([comentariosProductos])
 
+admin.site.register(PerfilUsuario)

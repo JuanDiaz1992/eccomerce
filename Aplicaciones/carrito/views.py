@@ -1,9 +1,11 @@
 from django.shortcuts import render
-from Aplicaciones.tiendaEnLinea.models import Productos
-from .carro import Carro
 from django.shortcuts import redirect
 from django.contrib import messages
+
+from .carro import Carro
 from Aplicaciones.tiendaEnLinea.models import Categoria
+from Aplicaciones.tiendaEnLinea.models import Productos
+
 
 # Create your views here.
 
@@ -47,3 +49,7 @@ def limpiar_carro(request):
     carro = Carro(request)
     carro.limpiar_carro()
     return redirect("tiendaEnLinea:index")
+
+
+
+    

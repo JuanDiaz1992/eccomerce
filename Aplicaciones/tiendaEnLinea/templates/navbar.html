@@ -28,7 +28,7 @@
             <!--Si el usuario tiene sesión iniciada-->
         {% if request.user.is_authenticated %}
             <li class="nav-menu-item dropdown hidden-movil">
-                <a href="#" class="nav-menu-link nav-links usuario">{{user.perfilusuario.nombre1}} {{user.perfilusuario.primerApellido}}</a>       
+                <a href="{% url 'tiendaEnLinea:ModificarPerfil' %}" class="nav-menu-link nav-links usuario">{{user.perfilusuario.nombre1}} {{user.perfilusuario.primerApellido}}</a>       
                 <div class="dropdown-content">
                     <a class="cerrarSesion" href="{% url 'tiendaEnLinea:ModificarPerfil' %}">Perfil</a>
                     <a class="cerrarSesion" href="{% url 'tiendaEnLinea:listaPedidosUsuario' %}">Pedidos</a>
@@ -36,7 +36,7 @@
                 </div>
             </li>
             <li class="nav-menu-item hidden-escritorio">
-                <a href="#" class="nav-menu-link nav-links usuario">{{user.perfilusuario.nombre1}} {{user.perfilusuario.primerApellido}}</a>
+                <a class="nav-menu-link nav-links" href="{% url 'tiendaEnLinea:ModificarPerfil' %}">{{user.perfilusuario.nombre1}} {{user.perfilusuario.primerApellido}}</a>
             </li>
             <li class="nav-menu-item hidden-escritorio">
                 <a class="nav-menu-link nav-links" href="{% url 'tiendaEnLinea:listaPedidosUsuario' %}">Pedidos</a>

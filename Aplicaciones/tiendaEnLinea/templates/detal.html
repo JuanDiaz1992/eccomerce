@@ -59,6 +59,28 @@
                     <h3 class="bg-2 size1">{{i.nombre}}</h3>
                     <p class="bg-3 marca marca_detalle">Por {{i.marca}}</p>
                     <div class="precio">
+                        {% if i.colores.count > 0 or  i.tallas.count > 0 %}  
+                        <form action="POST">
+                            <input type="color" value="#ff0000">
+                                                    <!--Color-->
+                            {% if i.colores.count > 0%}
+                            <h5>Colores Disponibles</h5>
+                            {% for n in i.colores.all %}
+                                
+                                <p>{{n.colores}}</p>
+                            {% endfor %}
+                        {% endif %}
+                        <!--Talla-->
+                        {% if i.tallas.count > 0 %}
+                            <h5>Tallas Disponibles</h5>
+                            {% for o in i.tallas.all %}
+                                <p>{{o.tallas}}</p>
+                            {% endfor %}
+                        {% endif %}
+
+                        </form>
+                        {% endif %}
+
                         {% load humanize %}
                         {% if i.descuento == 0 %}
                             <h5 class="bg-2 precioDetalle">${{i.precio|intcomma}} </h5>

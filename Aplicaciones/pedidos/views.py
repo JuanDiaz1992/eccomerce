@@ -64,17 +64,22 @@ def procesar_pedido(request):
                     pedido = pedido,
                     subTotal = value["precio"]
                 ))
+            try:
             #uso de función para envió de correo:
-            LineaPedido.objects.bulk_create(lineas_pedido)
-            enviar_email(
-                pedido = pedido,
-                lineas_pedido = lineas_pedido,
-                nombreusuario = request.user.username,
-                emailusuario = request.user.email
-            )
-            carro = Carro(request)
-            carro.limpiar_carro()
-            return redirect('tiendaEnLinea:succes')
+                LineaPedido.objects.bulk_create(lineas_pedido)
+                enviar_email(
+                    pedido = pedido,
+                    lineas_pedido = lineas_pedido,
+                    nombreusuario = request.user.username,
+                    emailusuario = request.user.email
+                )
+                carro = Carro(request)
+                carro.limpiar_carro()
+                return redirect('tiendaEnLinea:succes')
+            except:
+                carro = Carro(request)
+                carro.limpiar_carro()
+                return redirect('tiendaEnLinea:succes')
             
     else:
         user = request.user.id

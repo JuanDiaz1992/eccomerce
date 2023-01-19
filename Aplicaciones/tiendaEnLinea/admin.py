@@ -1,7 +1,7 @@
 from django.contrib import admin
 from Aplicaciones.Usuarios.models import PerfilUsuario
 from Aplicaciones.pedidos.models import Pedido, LineaPedido
-from Aplicaciones.tiendaEnLinea.models import Productos,Categoria, imagenesProductos,sliders, comentariosProductos
+from Aplicaciones.tiendaEnLinea.models import Productos,Categoria, imagenesProductos,sliders, comentariosProductos, coloresProducto,tallaProductos
 
 
 # Register your models here.
@@ -15,6 +15,14 @@ admin.site.register(Categoria)
 class ImagenProductoAdmin(admin.TabularInline):
     model = imagenesProductos
 
+class colorP(admin.TabularInline):
+    model = coloresProducto
+    extra = 1
+
+class TallP(admin.TabularInline):
+    model = tallaProductos
+    extra = 1
+
 
 class ProductoAdmin(admin.ModelAdmin):
     list_display = ['nombre','categoria','stock','precio']
@@ -23,6 +31,8 @@ class ProductoAdmin(admin.ModelAdmin):
     list_filter = ['marca','activo']
     list_per_page: 10
     inlines = [
+        colorP,
+        TallP,
         ImagenProductoAdmin
     ]
 

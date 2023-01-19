@@ -3,6 +3,8 @@ from autoslug import AutoSlugField
 from django.contrib.auth import get_user_model
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from .choices import color,tallas
+
 
 User = get_user_model()
 
@@ -20,6 +22,7 @@ class Categoria (models.Model):
     class Meta:
         verbose_name_plural='Categoria'
 
+
 class Productos(models.Model):
     codigo = models.CharField(max_length=10)
     nombre=models.CharField(max_length=250)
@@ -33,8 +36,10 @@ class Productos(models.Model):
     categoria=models.ForeignKey(Categoria,on_delete=models.CASCADE)
     destacado=models.BooleanField(default=True)
     activo= models.BooleanField(default=True)
-    created_at = models.DateTimeField(auto_now_add=True)
     stock = models.IntegerField(default=1)
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+
 
 
     def __str__(self) -> str:
@@ -43,9 +48,16 @@ class Productos(models.Model):
     class Meta:
         verbose_name_plural='Producto'
 
+def choiceadapter(enumtype):
+    return ((item.value, item.name.replace('_', ' ')) for item in enumtype)
 
+class coloresProducto(models.Model):
+    colores = models.CharField(max_length=50, choices= color,default= 15)
+    producto = models.ForeignKey(Productos, on_delete=models.CASCADE, related_name='colores')
 
-
+class tallaProductos(models.Model):
+    tallas = models.CharField(max_length=50, choices= tallas,default= 'Talla Unica')
+    producto = models.ForeignKey(Productos, on_delete=models.CASCADE, related_name='tallas')
 
 class imagenesProductos(models.Model):
     imagen= models.ImageField(upload_to = 'img/Productos')

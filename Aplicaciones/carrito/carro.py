@@ -9,7 +9,7 @@ class Carro:
             carro=self.session["carro"]={}
         #else:
         self.carro=carro
-    def agregar(self,producto):
+    def agregar(self,producto,imagen):
         if(str(producto.id) not in self.carro.keys()):
             self.carro[producto.id]={
                 "producto_id":producto.id,
@@ -19,10 +19,12 @@ class Carro:
                 "descuento": str(producto.descuento),
                 "precioSinDescuento": str(producto.PrecioSinDescuento),
                 "cantidad":1,
+                "imagen":imagen.url,
                 "stock": producto.stock,
-                "imagen":producto.imagen.url,
+
                 "descuento":producto.descuento,
             }
+
         else:
             for key,value in self.carro.items():
                     if key == str(producto.id) and value["stock"] != value["cantidad"]:

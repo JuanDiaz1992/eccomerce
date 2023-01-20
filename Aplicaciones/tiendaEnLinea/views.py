@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from collections import Counter
 from Aplicaciones.carrito.carro import Carro
 from Aplicaciones.pedidos.models import LineaPedido,Pedido
-from .models import Categoria,Productos, imagenesProductos,sliders,comentariosProductos
+from .models import Categoria,Productos, sliders,comentariosProductos
 from .forms import formComentario
 
 user = get_user_model()

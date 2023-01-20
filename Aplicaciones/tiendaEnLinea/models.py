@@ -27,7 +27,6 @@ class Productos(models.Model):
     codigo = models.CharField(max_length=10)
     nombre=models.CharField(max_length=250)
     slug=AutoSlugField(populate_from ='codigo')
-    imagen= models.ImageField(upload_to = 'img/Productos' , default='static/img/logo.png', null= True, blank=True)
     marca=models.CharField(max_length=250)
     descripcion=models.TextField(blank=True,null=True)
     precio=models.IntegerField(default=0)
@@ -51,18 +50,21 @@ class Productos(models.Model):
 def choiceadapter(enumtype):
     return ((item.value, item.name.replace('_', ' ')) for item in enumtype)
 
-class coloresProducto(models.Model):
-    colores = models.CharField(max_length=50, choices= color,default= 15)
-    producto = models.ForeignKey(Productos, on_delete=models.CASCADE, related_name='colores')
+class imagenesProductos(models.Model):
+    colores = models.CharField(max_length=50, choices= color,default= 'No incluye colores')
+    imagen= models.ImageField(upload_to = 'img/Productos', default='static/img/logo.png', null= True, blank=True)
+    producto = models.ForeignKey(Productos, on_delete=models.CASCADE, related_name='imagenes')
+
 
 class tallaProductos(models.Model):
     tallas = models.CharField(max_length=50, choices= tallas,default= 'Talla Unica')
     producto = models.ForeignKey(Productos, on_delete=models.CASCADE, related_name='tallas')
 
+"""
 class imagenesProductos(models.Model):
     imagen= models.ImageField(upload_to = 'img/Productos')
     producto = models.ForeignKey(Productos, on_delete=models.CASCADE, related_name='imagenes')
-    
+"""   
 
 class comentariosProductos(models.Model):
     comentario = models.CharField(max_length=250,blank=True,null=True)

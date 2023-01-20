@@ -1,10 +1,10 @@
 color = (
-        ('Negro','Negro'), ('1','Blanco'), ('Azul','Azul'), ('Rojo','Rojo'),
-        ('Verde','Verde'), ('Café','Café'), ('Gris','Gris'), ('Rosa','Rosa'),
+        ('Negro','Negro'), ('Blanco','Blanco'), ('Azul','Azul'), ('Rojo','Rojo'),
+        ('Verde','Verde'), ('Marron','Marron'), ('Gris','Gris'), ('Rosa','Rosa'),
         ('Purpura','Purpura'), ('Naranja','Naranja'), ('Amarillo','Amarillo'),
-        ('olivo oscuro','olivo oscuro'),('Rosa Claro','Rosa Claro'),
+        ('Olivo Oscuro','Olivo Oscuro'),('Rosa Claro','Rosa Claro'),
         ('Azul Claro','Azul Claro'),('Palo Rosa','Palo Rosa'),
-        ('15','No incluye colores'),
+        ('No incluye colores','No incluye colores'),('Multicolor','Multicolor')
     )
 
 tallas = (

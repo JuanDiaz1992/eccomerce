@@ -4,7 +4,7 @@ from django.contrib import messages
 
 from .carro import Carro
 from Aplicaciones.tiendaEnLinea.models import Categoria
-from Aplicaciones.tiendaEnLinea.models import Productos
+from Aplicaciones.tiendaEnLinea.models import Productos,imagenesProductos
 
 
 # Create your views here.
@@ -13,13 +13,17 @@ from Aplicaciones.tiendaEnLinea.models import Productos
 def agregar_desde_detalle(request,producto_id):
     carro = Carro(request)
     producto = Productos.objects.get(id = producto_id)
+    img3 = imagenesProductos.objects.filter(producto_id = producto_id)[:1]
+    img2 = imagenesProductos.objects.get(id = img3)
+    img = img2.imagen
+    print(img)
     template_name = 'detal.html'
-    
     try:
-        carro.agregar(producto = producto)
+        carro.agregar(producto = producto, imagen = img)
         messages.success(request,"Producto agregado al carrito")
     except:
         messages.error(request,"Ya agregaste las existencias disponibles de este producto")
+
     return redirect('tiendaEnLinea:detail',producto_id) 
 
 

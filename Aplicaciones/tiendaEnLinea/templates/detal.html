@@ -26,60 +26,83 @@
                     {% endfor %}
                 {% endif %}
                                             <!--Carrusel Fotos-->
-                <div class="carouselContainer">
-                    <div id="carouselExampleControls" class="carouselContainer--carousel carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active carousel-item--detalle">
-                                <img src="{{i.imagen.url}}" class="d-block w-100 carousel--img" alt="...">
-                            </div>
-                            {% if i.imagenes.count == 1 %}
-                                <div class="carousel-item carousel-item--detalle">
-                                <img src="{{i.imagenes.first.imagen.url}}" class="d-block w-100 carousel--img" alt="...">
-                                </div>
-                            {% elif i.imagenes.count > 1 %}
-                                {% for m in i.imagenes.all %}
-                                    <div class="carousel-item carousel-item--detalle">
-                                        <img src="{{m.imagen.url}}" class="d-block w-100 carousel--img" alt="...">
-                                    </div>
-                                {% endfor %}
-                            {% endif %}
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
+
+                <div class="containerCarrusel">
+                    {% for m in i.imagenes.all %}
+                    <div class="mySlides">
+                        <img src="{{m.imagen.url}}" alt="imagen-1">
                     </div>
+                    {% endfor %}
+                    
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            
+
                 </div>
+
                                             <!--Detalles articulo-->
                 <div class="categoria__text--detalle">
                     <h3 class="bg-2 size1">{{i.nombre}}</h3>
                     <p class="bg-3 marca marca_detalle">Por {{i.marca}}</p>
                     <div class="precio">
-                        {% if i.colores.count > 0 or  i.tallas.count > 0 %}  
-                        <form action="POST">
-                            <input type="color" value="#ff0000">
-                                                    <!--Color-->
-                            {% if i.colores.count > 0%}
-                            <h5>Colores Disponibles</h5>
-                            {% for n in i.colores.all %}
-                                
-                                <p>{{n.colores}}</p>
-                            {% endfor %}
+                                                <!--Color-->
+
+                            {% if i.imagenes.count > 0%}
+                            <h5>Colores Disponibles:</h5>
+                            <div class="elements">
+                                {% for n in i.imagenes.all %}
+                                    {% if n.colores == 'Negro' %}
+                                        <span class="quadrate  Negro" onclick="currentSlide({{forloop.counter}})"></span>
+                                    {% elif n.colores == 'Azul' %}
+                                        <span class="quadrate Azul" onclick="currentSlide({{forloop.counter}})"></span>
+                                    {% elif n.colores == 'Blanco' %}
+                                        <span class="quadrate Blanco" onclick="currentSlide({{forloop.counter}})"></span>
+                                    {% elif n.colores == 'Rojo' %}
+                                        <span class="quadrate Rojo" onclick="currentSlide({{forloop.counter}})"></span>
+                                    {% elif n.colores == 'Verde' %}
+                                        <span class="quadrate Verde" onclick="currentSlide({{forloop.counter}})"></span>
+                                    {% elif n.colores == 'Gris' %}
+                                        <span class="quadrate Gris" onclick="currentSlide({{forloop.counter}})"></span>
+                                    {% elif n.colores == 'Rosa' %}
+                                        <span class="quadrate Rosa" onclick="currentSlide({{forloop.counter}})"></span>
+                                    {% elif n.colores == 'Purpura' %}
+                                        <span class="quadrate Purpura" onclick="currentSlide({{forloop.counter}})"></span>
+                                    {% elif n.colores == 'Naranja' %}
+                                        <span class="quadrate Naranja" onclick="currentSlide({{forloop.counter}})"></span>
+                                    {% elif n.colores == 'Amarillo' %}
+                                        <span class="quadrate Amarillo" onclick="currentSlide({{forloop.counter}})"></span>
+                                    {% elif n.colores == 'Rosa Claro' %}
+                                        <span class="quadrate Rosa_Claro" onclick="currentSlide({{forloop.counter}})"></span>
+                                    {% elif n.colores == 'Azul Claro' %}
+                                        <span class="quadrate Azul_Claro" onclick="currentSlide({{forloop.counter}})"></span>
+                                    {% elif n.colores == 'Palo Rosa' %}
+                                        <span class="quadrate Palo_Rosa" onclick="currentSlide({{forloop.counter}})"></span>
+                                    {% elif n.colores == 'Marron' %}
+                                        <span class="quadrate Marron" onclick="currentSlide({{forloop.counter}})"></span>
+                                    {% elif n.colores == 'Olivo Oscuro' %}
+                                        <span class="quadrate Olivo_Oscuro" onclick="currentSlide({{forloop.counter}})"></span>
+                                    {% elif n.colores == 'Multicolor' %}
+                                        <span class="quadrate Multicolor" onclick="currentSlide({{forloop.counter}})"></span>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+
                         {% endif %}
                         <!--Talla-->
-                        {% if i.tallas.count > 0 %}
-                            <h5>Tallas Disponibles</h5>
-                            {% for o in i.tallas.all %}
-                                <p>{{o.tallas}}</p>
-                            {% endfor %}
-                        {% endif %}
+                        <div class="tallas">
+                            {% if i.tallas.count > 0 %}
+                            <h5>Tallas Disponibles:</h5>
+                            <div class="tallas__container">
+                                {% for o in i.tallas.all %}
+                                    <p class="tallas__container--item">{{o.tallas}}</p>
+                                {% endfor %}
+                            </div>
 
-                        </form>
                         {% endif %}
+                        </div>
+
+
+
 
                         {% load humanize %}
                         {% if i.descuento == 0 %}
@@ -101,6 +124,7 @@
                             <a class="btn btn-primary ancho" href="{% url 'tiendaEnLinea:agregarDetalle' i.id%}">
                                 <i class="fa-sharp fa-solid fa-cart-shopping"></i> Agregar al carrito
                             </a>
+                            
                         {% else %}
                             <h3 class="alert alert-info">Inicia sesión para comprar este producto</h3>
                         {% endif %}

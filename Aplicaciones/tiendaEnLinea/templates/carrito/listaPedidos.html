@@ -23,6 +23,10 @@
                                         <p class="color3">{{i.estadoPedido}}</p>
                                     {% elif i.estadoPedido == 'Pedido entregado' %}
                                         <p class="color4">{{i.estadoPedido}}</p>
+                                    {% elif i.estadoPedido == 'Rechazado' %}
+                                        <p class="color5">{{i.estadoPedido}}</p>
+                                    {% else %}
+                                        <p class="color1">{{i.estadoPedido}}</p>
                                     {% endif %}
                                     
                                     <p>{{i.producto}}</p>

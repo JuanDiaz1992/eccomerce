@@ -25,6 +25,8 @@ class TallP(admin.TabularInline):
     model = tallaProductos
     extra = 1
 
+class detalPedido(admin.TabularInline):
+    model = LineaPedido
 
 class ProductoAdmin(admin.ModelAdmin):
     list_display = ['nombre','categoria','stock','precio']
@@ -41,6 +43,9 @@ class pedidoList(admin.ModelAdmin):
     list_display = ['ordernum','user','status']
     list_per_page: 10
     search_fields = ['ordernum']
+    inlines =[
+        detalPedido,
+    ]
 
 class pedidoListDetalle(admin.ModelAdmin):
     list_display = ["pedido",'estadoPedido','producto','cantidad','user']

@@ -27,6 +27,10 @@
                                 <p class="color3">{{i.estadoPedido}}</p>
                             {% elif i.estadoPedido == 'Pedido entregado' %}
                                 <p class="color4">{{i.estadoPedido}}</p>
+                            {% elif i.estadoPedido == 'Rechazado' %}
+                                <p class="color5">{{i.estadoPedido}}</p>
+                            {% else %}
+                                <p class="color1">{{i.estadoPedido}}</p>
                             {% endif %}
 
                             <p>Precio por unidad: <span class="precioUnidad">${{i.precioUnidad|intcomma}}</span></p>
@@ -38,7 +42,7 @@
                     </div>
             {% endfor %}
             </div>
-               
+
             <div class="tablaInfor_container--ListaP--container2">
                 <div class="detallCompra">
                     <h4>Detalle de la compra</h4>

@@ -46,8 +46,7 @@
                     <p class="bg-3 marca marca_detalle">Por {{i.marca}}</p>
                     <div class="precio">
                                                 <!--Color-->
-
-                            {% if i.imagenes.count > 0%}
+                            {% if i.imagenes.count > 0 %}
                             <h5>Colores Disponibles:</h5>
                             <div class="elements">
                                 {% for n in i.imagenes.all %}
@@ -84,6 +83,7 @@
                                     {% elif n.colores == 'Multicolor' %}
                                         <span class="quadrate Multicolor" onclick="currentSlide({{forloop.counter}})"></span>
                                     {% endif %}
+                                    
                                 {% endfor %}
                             </div>
 

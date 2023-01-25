@@ -106,19 +106,19 @@ WSGI_APPLICATION = 'ecomerce.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-"""
+
 #windows
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ecomerceIV',
+        'NAME': 'ecomerceRomofyi',
         'USER': 'postgres',
         'PASSWORD': '3118',
         'HOST': '127.0.0.1',
         'DATABASE_PORT': '5432'
     }
 }
-
+"""
 
 #LINUX
 
@@ -133,14 +133,14 @@ DATABASES = {
     }
 }
 
-"""
+
 DATABASES = {
     'default': {
     'ENGINE': 'django.db.backends.sqlite3',
     'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
+"""
 
 
 # Password validation

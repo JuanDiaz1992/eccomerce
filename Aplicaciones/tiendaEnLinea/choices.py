@@ -4,8 +4,8 @@ color = (
         ('Purpura','Purpura'), ('Naranja','Naranja'), ('Amarillo','Amarillo'),
         ('Olivo Oscuro','Olivo Oscuro'),('Rosa Claro','Rosa Claro'),
         ('Azul Claro','Azul Claro'),('Palo Rosa','Palo Rosa'),
-        ('No incluye colores','No incluye colores'),('Multicolor','Multicolor')
-    )
+        ('','No incluye colores'),('Multicolor','Multicolor')
+)
 
 tallas = (
         ('S','S'),('M','M'),('L','L'),('XS','XS'),('XXS','XXS'),

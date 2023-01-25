@@ -51,7 +51,7 @@ def choiceadapter(enumtype):
     return ((item.value, item.name.replace('_', ' ')) for item in enumtype)
 
 class imagenesProductos(models.Model):
-    colores = models.CharField(max_length=50, choices= color,default= 'No incluye colores')
+    colores = models.CharField(max_length=50, choices= color,default= '',blank=True,null=True)
     imagen= models.ImageField(upload_to = 'img/Productos', default='static/img/logo.png', null= True, blank=True)
     producto = models.ForeignKey(Productos, on_delete=models.CASCADE, related_name='imagenes')
 

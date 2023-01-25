@@ -16,7 +16,6 @@ def agregar_desde_detalle(request,producto_id):
     img3 = imagenesProductos.objects.filter(producto_id = producto_id)[:1]
     img2 = imagenesProductos.objects.get(id = img3)
     img = img2.imagen
-    print(img)
     template_name = 'detal.html'
     try:
         carro.agregar(producto = producto, imagen = img)
@@ -30,9 +29,12 @@ def agregar_desde_detalle(request,producto_id):
 
 
 def agregar_producto(request,producto_id):
+    img3 = imagenesProductos.objects.filter(producto_id = producto_id)[:1]
+    img2 = imagenesProductos.objects.get(id = img3)
+    img = img2.imagen
     carro = Carro(request)
     producto = Productos.objects.get(id = producto_id)
-    carro.agregar(producto = producto)
+    carro.agregar(producto = producto, imagen = img)
     
     return redirect("tiendaEnLinea:mycart")
 

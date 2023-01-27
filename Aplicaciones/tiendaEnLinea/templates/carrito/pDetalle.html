@@ -50,7 +50,7 @@
                     <p>Con la referencia de pago: {{referencia}}</p>
                     <p>Dirección para el envío:</p>
                     <p>{{direccion}} en {{ciudad}}, <span class="departamento">{{departamento}}.</span></p>
-                    {% if comentarios != '' %}
+                    {% if comentarios != '' or comentarios != 'None' %}
                     <p>Comentarios: {{comentarios}}</p>
                     {% endif %}
                     <p>Total de la compra: <span class="pedidoF">$ {{pedidoF|intcomma}}</span></p>

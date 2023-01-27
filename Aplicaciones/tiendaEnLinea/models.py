@@ -25,7 +25,7 @@ class Categoria (models.Model):
 
 class Productos(models.Model):
     codigo = models.CharField(max_length=10)
-    nombre=models.CharField(max_length=250)
+    nombre=models.CharField(max_length=70)
     slug=AutoSlugField(populate_from ='codigo')
     marca=models.CharField(max_length=250)
     descripcion=models.TextField(blank=True,null=True)

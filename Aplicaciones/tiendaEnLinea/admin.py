@@ -27,6 +27,7 @@ class TallP(admin.TabularInline):
 
 class detalPedido(admin.TabularInline):
     model = LineaPedido
+    extra = 0
 
 class ProductoAdmin(admin.ModelAdmin):
     list_display = ['nombre','categoria','stock','precio']

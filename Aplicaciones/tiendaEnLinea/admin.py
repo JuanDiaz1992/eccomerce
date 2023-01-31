@@ -48,17 +48,12 @@ class pedidoList(admin.ModelAdmin):
         detalPedido,
     ]
 
-class pedidoListDetalle(admin.ModelAdmin):
-    list_display = ["pedido",'estadoPedido','producto','cantidad','user']
-    list_editable = ['estadoPedido']
-    list_filter = ['estadoPedido','user']
-    list_per_page: 10
-    search_fields = ["ForeignKey__pedido"]
+
     
 
 admin.site.register(Pedido,pedidoList)
 admin.site.register(Productos,ProductoAdmin)
-admin.site.register(LineaPedido,pedidoListDetalle)
+
 
 admin.site.register([comentariosProductos])
 

@@ -48,12 +48,14 @@ function showSlides(n){
     if(n < 1) slideIndex = slides.length
     for(i = 0; i < slides.length; i++){
         slides[i].style.display = "none"
-        slides[i].style.opacity = "0"
+
     }
     for(i = 0; i < quadrates.length;i++){
         quadrates[i].className = quadrates[i].className.replace("activeC","")
     }
-    slides[slideIndex-1].style.display = "block";
+    slides[slideIndex-1].style.display = "flex";
     slides[slideIndex-1].style.opacity = "1";
     quadrates[slideIndex-1].className += " activeC";
 }
+
+

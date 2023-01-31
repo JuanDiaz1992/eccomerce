@@ -54,7 +54,7 @@ a:link, a:visited, a:active {
 	position: fixed;
 	z-index: 5;
 	width: 100%;
-	background-color: rgb(255, 255, 255);
+	background: #184a91;
 	display: flex;	
 	align-items: center;
 	flex-direction: column;

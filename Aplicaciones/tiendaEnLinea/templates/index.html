@@ -55,21 +55,22 @@
             <div class="section2__div__div--articles">
                 {% for i in productos %}
                     <a class="section2__articles section2__articles--item" href="{% url 'tiendaEnLinea:detail' i.id %}">
-                        <div class="card__grid">
+                        <div class="card__grid flexCard">
                             <picture class="section2__articles__picture">
                                 <img src="{{i.imagenes.first.imagen.url}}" alt="imagen">
                             </picture>
-                            <h5 class="bg-3 marca">Por {{i.marca}}</h5>
-                            <p class="section2__articles__p1 bg-3">{{i.nombre}}</p>
+                            <div>
+                                <h5 class="bg-3 marca">Por {{i.marca}}</h5>
+                                <p class="section2__articles__p1 bg-3">{{i.nombre}}</p>
+                            </div>
                             <div class="precio">
                                 {% load humanize %}
                                 {% if i.descuento == 0 %}
-                                    <h5 class="bg-2">${{i.precio|intcomma}} </h5>
-                                    <p class="sinDescuento"></p>
-                                    <div>
-                                        <h5 class="bg-2"></h5> 
-                                        <p class="descuento"></p>
-                                    </div>    
+                                <p class="sinDescuento">  </p>
+                                <div class="descuento__detalle">
+                                    <h5 class="bg-2">${{i.precio|intcomma}} </h5> 
+                                    <p class="descuento">  </p>
+                                </div>
                                 {% else %}
                                     <p class="sinDescuento">${{i.PrecioSinDescuento}}</p>
                                     <div class="descuento__detalle">

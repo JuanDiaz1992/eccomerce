@@ -88,8 +88,10 @@ h3{
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-
+	background-color: white;
+	margin-bottom: 5px;
 }
+
 
 .section2__articles__picture img{
 	width:100%;

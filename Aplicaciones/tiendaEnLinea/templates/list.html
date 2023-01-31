@@ -2,15 +2,9 @@
 {% load static %}
 {% block title %} listado de productos {% endblock %}
 {% block content %}
-    <section class="banner__div__containerBannerCategoria">
-            <picture class="banner__div__picture--banner2">
-                <img src="{% static 'img/banner2.jpg' url %}" alt="modelo">
-            </picture>
-    </section>
-
     <section class="categoria__section">
-        <div>
-            <p>{{nombreCat}}</p>
+        <div class="categoria__section--nombreCategoria">
+            <p>Estas en {{nombreCat}}</p>
         </div>
         <div class="listado">
             {% for i in productos %}

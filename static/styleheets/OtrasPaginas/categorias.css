@@ -1,22 +1,26 @@
-.banner__div__containerBannerCategoria{
-    width: 100%;
-    margin-top: 80px;
-}
 .categoria__section{
     display: flex;
     justify-content: center;
     gap: 50px;
-
-
+    margin-top: 80px;
 }
+.categoria__section--nombreCategoria{
+    margin: 25px 0 0 40px;
+}
+.categoria__section--nombreCategoria p{
+    font-size: 20px;
+}
+.flexCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .logo_categoria{
     width: 99px;
     height: 84px;
 }
 
-.banner__div__picture--banner2 img{
-    width: 100%;
-}
 .filtros{
     width: 30%;
 }
@@ -61,6 +65,7 @@
 .descuento{
     font-size: 15px;
     color: #00a650 ;
+    margin-bottom: 0;
 }
 
 .marca{

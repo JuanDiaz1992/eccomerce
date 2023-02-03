@@ -85,14 +85,19 @@ p{
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 400px;
+    width: 100%;
+    justify-content: center; 
 }
 
+.disNone{
+    display: none;
+}
 .containerCarrusel{
     width: 50%;
     position: relative;
 }
 .mySlides{
-    display: none;
     height: 400px;
     width: 100%;
 
@@ -103,6 +108,7 @@ p{
     object-fit: contain;
     object-position: center;
     height: 400px;
+    
 }
 .prev,
 .next{
@@ -134,32 +140,75 @@ p{
     background-color: rgb(173 173 173 / 80%);
 }
 .elements{
-    text-align: left;
+    display: flex;
+    width: 100%;
+    gap: 45px 10px;
+    padding-top: 42px;
+    flex-wrap: wrap;
 }
 .quadrate{
     margin: 5px;
-    border-radius: 50%;
-    width: 26px;
-    height: 26px;
+    width: 50px;
+    height: 50px;
     cursor: pointer;
-    display: inline-block;
-    transition: all 0.6s ease;
-
-}
-.activeC, .quadrate:hover{
-    border: 2px solid rgb(0, 247, 255);
-}
-
-.fade {
+    display: flex;
     justify-content: center;
-    animation-name: fade;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    
+
+}
+.quadrate img{
+    width: auto;
+    height: 100%;
+
+}
+.quadrate__container{
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.quadrate--p{
+    width: max-content;
+    position: absolute;
+    top: -40px;
+    font-size: 15px;
+    padding: 7px;
+    background-color: #000000cc;
+    text-align: center;
+    border-radius: 10px;
+    color: white;
+
+}
+.disActivP{
+    opacity: 1 !important; 
+    transform: translatey(0)!important;
+    transition: all .6s ease;
+}
+
+.disNoneP{
+    opacity: 0; 
+    transform: translatey(10px);
+}
+
+.activeC, .quadrate:hover{
+    border: 3px solid var(--dorado);
+}
+
+.animation {
+    animation-name: movimiento;
     animation-duration: 1.5s;
 }
 
-@keyframes fade {
-    from {opacity: .5}
-    to {opacity: 1}
+@keyframes movimiento {
+    from {transform:translatey(50px);
+    opacity: 0.5;}
+    to {transform:translatey(0);
+    opacity: 1;}
 }
+
 
 
 

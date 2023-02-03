@@ -29,7 +29,7 @@
 
                 <div class="containerCarrusel">
                     {% for m in i.imagenes.all %}
-                    <div class="mySlides fade">
+                    <div class="mySlides disNone animation" id="mySlides">
                         <img src="{{m.imagen.url}}" alt="imagen-1">
                     </div>
                     {% endfor %}
@@ -51,37 +51,182 @@
                             <div class="elements">
                                 {% for n in i.imagenes.all %}
                                     {% if n.colores == 'Negro' %}
-                                        <span class="quadrate  Negro" onclick="currentSlide({{forloop.counter}})"></span>
+                                        <div class="quadrate__container">
+                                            <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
+                                                <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                            </picture>
+                                            <p class="quadrate--p disNoneP">{{n.colores}}</p>    
+                                        </div>
+                                        
+                                            
+                                        </picture>
+                                        
+                                        
                                     {% elif n.colores == 'Azul' %}
-                                        <span class="quadrate Azul" onclick="currentSlide({{forloop.counter}})"></span>
+                                        <div class="quadrate__container">
+                                            <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
+                                                <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                            </picture>
+                                            <p class="quadrate--p disNoneP">{{n.colores}}</p>    
+                                        </div>
+                                        
+                                            
+                                        </picture>
+                                        
                                     {% elif n.colores == 'Blanco' %}
-                                        <span class="quadrate Blanco" onclick="currentSlide({{forloop.counter}})"></span>
+                                        <div class="quadrate__container">
+                                            <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
+                                                <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                            </picture>
+                                            <p class="quadrate--p disNoneP">{{n.colores}}</p>    
+                                        </div>
+                                        
+                                            
+                                        </picture>
+                                        
                                     {% elif n.colores == 'Rojo' %}
-                                        <span class="quadrate Rojo" onclick="currentSlide({{forloop.counter}})"></span>
+                                        <div class="quadrate__container">
+                                            <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
+                                                <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                            </picture>
+                                            <p class="quadrate--p disNoneP">{{n.colores}}</p>    
+                                        </div>
+                                        
+                                            
+                                        </picture>
+                                        
                                     {% elif n.colores == 'Verde' %}
-                                        <span class="quadrate Verde" onclick="currentSlide({{forloop.counter}})"></span>
+                                        <div class="quadrate__container">
+                                            <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
+                                                <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                            </picture>
+                                            <p class="quadrate--p disNoneP">{{n.colores}}</p>    
+                                        </div>
+                                        
+                                            
+                                        </picture>
+                                        
                                     {% elif n.colores == 'Gris' %}
-                                        <span class="quadrate Gris" onclick="currentSlide({{forloop.counter}})"></span>
+                                        <div class="quadrate__container">
+                                            <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
+                                                <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                            </picture>
+                                            <p class="quadrate--p disNoneP">{{n.colores}}</p>    
+                                        </div>
+                                        
+                                            
+                                        </picture>
+                                        
                                     {% elif n.colores == 'Rosa' %}
-                                        <span class="quadrate Rosa" onclick="currentSlide({{forloop.counter}})"></span>
+                                        <div class="quadrate__container">
+                                            <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
+                                                <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                            </picture>
+                                            <p class="quadrate--p disNoneP">{{n.colores}}</p>    
+                                        </div>
+                                        
+                                            
+                                        </picture>
+                                        
                                     {% elif n.colores == 'Purpura' %}
-                                        <span class="quadrate Purpura" onclick="currentSlide({{forloop.counter}})"></span>
+                                        <div class="quadrate__container">
+                                            <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
+                                                <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                            </picture>
+                                            <p class="quadrate--p disNoneP">{{n.colores}}</p>    
+                                        </div>
+                                        
+                                            
+                                        </picture>
+                                        
                                     {% elif n.colores == 'Naranja' %}
-                                        <span class="quadrate Naranja" onclick="currentSlide({{forloop.counter}})"></span>
+                                        <div class="quadrate__container">
+                                            <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
+                                                <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                            </picture>
+                                            <p class="quadrate--p disNoneP">{{n.colores}}</p>    
+                                        </div>
+                                        
+                                            
+                                        </picture>
+                                        
                                     {% elif n.colores == 'Amarillo' %}
-                                        <span class="quadrate Amarillo" onclick="currentSlide({{forloop.counter}})"></span>
+                                        <div class="quadrate__container">
+                                            <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
+                                                <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                            </picture>
+                                            <p class="quadrate--p disNoneP">{{n.colores}}</p>    
+                                        </div>
+                                        
+                                            
+                                        </picture>
+                                        
                                     {% elif n.colores == 'Rosa Claro' %}
-                                        <span class="quadrate Rosa_Claro" onclick="currentSlide({{forloop.counter}})"></span>
+                                        <div class="quadrate__container">
+                                            <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
+                                                <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                            </picture>
+                                            <p class="quadrate--p disNoneP">{{n.colores}}</p>    
+                                        </div>
+                                        
+                                            
+                                        </picture>
+                                        
                                     {% elif n.colores == 'Azul Claro' %}
-                                        <span class="quadrate Azul_Claro" onclick="currentSlide({{forloop.counter}})"></span>
+                                        <div class="quadrate__container">
+                                            <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
+                                                <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                            </picture>
+                                            <p class="quadrate--p disNoneP">{{n.colores}}</p>    
+                                        </div>
+                                        
+                                            
+                                        </picture>
+                                        
                                     {% elif n.colores == 'Palo Rosa' %}
-                                        <span class="quadrate Palo_Rosa" onclick="currentSlide({{forloop.counter}})"></span>
+                                        <div class="quadrate__container">
+                                            <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
+                                                <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                            </picture>
+                                            <p class="quadrate--p disNoneP">{{n.colores}}</p>    
+                                        </div>
+                                        
+                                            
+                                        </picture>
+                                        
                                     {% elif n.colores == 'Marron' %}
-                                        <span class="quadrate Marron" onclick="currentSlide({{forloop.counter}})"></span>
+                                        <div class="quadrate__container">
+                                            <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
+                                                <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                            </picture>
+                                            <p class="quadrate--p disNoneP">{{n.colores}}</p>    
+                                        </div>
+                                        
+                                            
+                                        </picture>
+                                        
                                     {% elif n.colores == 'Olivo Oscuro' %}
-                                        <span class="quadrate Olivo_Oscuro" onclick="currentSlide({{forloop.counter}})"></span>
+                                        <div class="quadrate__container">
+                                            <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
+                                                <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                            </picture>
+                                            <p class="quadrate--p disNoneP">{{n.colores}}</p>    
+                                        </div>
+                                        
+                                            
+                                        </picture>
+                                        
                                     {% elif n.colores == 'Multicolor' %}
-                                        <span class="quadrate Multicolor" onclick="currentSlide({{forloop.counter}})"></span>
+                                        <div class="quadrate__container">
+                                            <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
+                                                <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                            </picture>
+                                            <p class="quadrate--p disNoneP">{{n.colores}}</p>    
+                                        </div>
+                                        
+                                            
+                                        </picture>
+                                        
                                     {% endif %}
                                     
                                 {% endfor %}
@@ -94,7 +239,7 @@
                             <h5>Tallas Disponibles:</h5>
                             <div class="tallas__container">
                                 {% for o in i.tallas.all %}
-                                    <p class="tallas__container--item">{{o.tallas}}</p>
+                                    <p class="tallas__container--item" onclick="currentSlideT({{forloop.counter}})">{{o.tallas}}</p>
                                 {% endfor %}
                             </div>
 

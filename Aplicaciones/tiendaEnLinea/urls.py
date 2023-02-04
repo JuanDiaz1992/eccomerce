@@ -32,7 +32,7 @@ urlpatterns = [
     path('accounts/login/',Login.as_view(), name = 'login'),
     path('register/',register, name = 'register'),
     path('logout/',login_required(LogoutUsuario), name = 'logout'),
-    path('modPerfUs/', modificarPerUsuario, name = 'ModificarPerfil'),
+    path('modPerfUs/', modificarPerUsuario, name ='ModificarPerfil'),
     
 
     #procesar pedido

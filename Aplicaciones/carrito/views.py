@@ -23,6 +23,7 @@ def agregar_desde_detalle(request):
             talla = request.POST['talla']
         except:
             talla = "Estandar"
+            
         try:
             carro.agregar(producto = producto, imagen = img, color = colorProducto, talla = talla)
             messages.success(request,"Producto agregado al carrito")

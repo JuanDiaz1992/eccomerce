@@ -14,6 +14,14 @@
                         </a>
                         <div class="carrito__containe--nombre">
                             <a href="{% url 'tiendaEnLinea:detail' value.producto_id %}">{{value.nombre}}</a>
+                            <p>Color: {{value.color}}</p>
+                            {% if value.talla == "Estandar"%}
+                                
+                            {% elif value.talla != "Estandar" %}
+
+                            {% else %}
+                                <p>Talla: {{value.talla}}</p>
+                            {% endif %}
                         </div>
                         <div class="carrito__containe--buttons__container">
                             <div class="carrito__containe--buttons">

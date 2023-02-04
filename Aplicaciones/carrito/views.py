@@ -10,33 +10,41 @@ from Aplicaciones.tiendaEnLinea.models import Productos,imagenesProductos
 # Create your views here.
 
 
-def agregar_desde_detalle(request,producto_id):
+def agregar_desde_detalle(request):
     carro = Carro(request)
-    producto = Productos.objects.get(id = producto_id)
-    img3 = imagenesProductos.objects.filter(producto_id = producto_id)[:1]
-    img2 = imagenesProductos.objects.get(id = img3)
-    img = img2.imagen
-    template_name = 'detal.html'
-    try:
-        carro.agregar(producto = producto, imagen = img)
-        messages.success(request,"Producto agregado al carrito")
-    except:
-        messages.error(request,"Ya agregaste las existencias disponibles de este producto")
+    if request.method == 'POST':
+        id = request.POST['id']
+        producto = Productos.objects.get(id = id)
+        color = request.POST['color']
+        img2 = imagenesProductos.objects.get(id = color)
+        img = img2.imagen
+        colorProducto = img2.colores
+        try:
+            talla = request.POST['talla']
+        except:
+            talla = "Estandar"
+        try:
+            carro.agregar(producto = producto, imagen = img, color = colorProducto, talla = talla)
+            messages.success(request,"Producto agregado al carrito")
+        except:
+            messages.error(request,"Ya agregaste las existencias disponibles de este producto")
 
-    return redirect('tiendaEnLinea:detail',producto_id) 
-
-
+    return redirect('tiendaEnLinea:detail',id) 
 
 
 def agregar_producto(request,producto_id):
     img3 = imagenesProductos.objects.filter(producto_id = producto_id)[:1]
     img2 = imagenesProductos.objects.get(id = img3)
     img = img2.imagen
+    color =""
+    talla = ""
     carro = Carro(request)
     producto = Productos.objects.get(id = producto_id)
-    carro.agregar(producto = producto, imagen = img)
+    carro.agregar(producto = producto, imagen = img, color = color, talla = talla )
     
     return redirect("tiendaEnLinea:mycart")
+
+
 
 def eliminar_producto(request, producto_id):
     carro = Carro(request)

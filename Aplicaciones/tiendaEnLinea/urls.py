@@ -22,7 +22,7 @@ urlpatterns = [
     #carrito
     path('mycart/',login_required(mycart), name= 'mycart'),
     path('agregar/<int:producto_id>/',login_required(agregar_producto), name= 'agregar'),
-    path('agregarDetalle/<int:producto_id>/',agregar_desde_detalle, name= 'agregarDetalle'),
+    path('agregarDetalle/',agregar_desde_detalle, name= 'agregarDetalle'),
     path('eliminar/<int:producto_id>/',eliminar_producto, name= 'eliminar'),
     path('restar/<int:producto_id>/',restar_producto, name= 'restar'),
     path('limpiar/',limpiar_carro, name= 'limpiar'), 

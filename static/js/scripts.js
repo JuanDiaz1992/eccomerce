@@ -44,18 +44,26 @@ function showSlides(n){
     let i;
     let slides = document.querySelectorAll(".mySlides");
     let quadrates = document.querySelectorAll(".quadrate");
+    let radio = document.querySelectorAll(".colorSection");
     
     if(n > slides.length) slideIndex = 1
     if(n < 1) slideIndex = slides.length
     for(i = 0; i < slides.length; i++){
         slides[i].classList.replace("activef","disNone")
+        
     }
     for(i = 0; i < quadrates.length;i++){
         quadrates[i].className = quadrates[i].className.replace("activeC","")
+
+    }
+    for(i = 0; i < radio.length;i++){
+        radio[i].checked = radio[i].checked=false
     }
 
     slides[slideIndex-1].classList.replace("disNone","activef")
     quadrates[slideIndex-1].className += " activeC";
+    radio[slideIndex-1].checked = true
+
     
 
 }
@@ -67,13 +75,19 @@ function currentSlideT(m){
 }
 let tallas = function(m){
     let i;
+    let tallaRadio = document.querySelectorAll(".radioTalla");
     let tallas = document.querySelectorAll(".tallas__container--item") 
     if(m > tallas.length) slideIndexT = 1
     if(m < 1) slideIndexT = tallas.length
     for(i=0; i<tallas.length ;i++){
         tallas[i].className = tallas[i].className.replace("tallaActive","")
     }
+    for(i = 0; i < tallaRadio.length;i++){
+        tallaRadio[i].checked = tallaRadio[i].checked=false
+    }
+
     tallas[slideIndexT-1].className += " tallaActive";
+    tallaRadio[slideIndexT-1].checked = true
 } 
 
 

@@ -60,3 +60,4 @@ class formComentario(forms.ModelForm):
         model = comentariosProductos
         fields = ['comentario']
 
+

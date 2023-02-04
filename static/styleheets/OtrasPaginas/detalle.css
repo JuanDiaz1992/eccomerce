@@ -89,7 +89,9 @@ p{
     width: 100%;
     justify-content: center; 
 }
-
+.colorSection,.radioTalla{
+    display: none;
+}
 .disNone{
     display: none;
 }

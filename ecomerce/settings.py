@@ -38,8 +38,8 @@ SECRET_KEY = 'django-insecure-son4l&kkv@kk9pxz(2hs-$=e03)rl8j$vj)6&f9j3%o*(chohd
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['18.228.3.242']
-#ALLOWED_HOSTS = ['']
+#ALLOWED_HOSTS = ['18.228.3.242']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 MESSAGE_STORAGE= "django.contrib.messages.storage.cookie.CookieStorage"
@@ -84,8 +84,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_URL = '/static/'
-STATIC_ROOT=os.path.join(BASE_DIR, 'static')
-#STATICFILES_DIRS = [ BASE_DIR, 'static']
+#STATIC_ROOT=os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [ BASE_DIR, 'static']
 
 TEMPLATES = [
     {

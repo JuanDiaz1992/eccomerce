@@ -44,7 +44,9 @@
                 <div class="categoria__text--detalle">
                     <h3 class="bg-2 size1">{{i.nombre}}</h3>
                     <p class="bg-3 marca marca_detalle">Por {{i.marca}}</p>
-                    <div class="precio">
+                    <form class="precio"  method="post" action="/agregarDetalle/">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{i.id}}">
                                                 <!--Color-->
                             {% if i.imagenes.count > 0 %}
                             <h5>Colores Disponibles:</h5>
@@ -54,178 +56,146 @@
                                         <div class="quadrate__container">
                                             <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
                                                 <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                                <input class="colorSection" type="radio" name="color" id="" value="{{n.id}}">
                                             </picture>
                                             <p class="quadrate--p disNoneP">{{n.colores}}</p>    
                                         </div>
-                                        
-                                            
-                                        </picture>
                                         
                                         
                                     {% elif n.colores == 'Azul' %}
                                         <div class="quadrate__container">
                                             <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
                                                 <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                                <input class="colorSection" type="radio" name="color" id="" value="{{n.id}}">
                                             </picture>
                                             <p class="quadrate--p disNoneP">{{n.colores}}</p>    
                                         </div>
-                                        
-                                            
-                                        </picture>
                                         
                                     {% elif n.colores == 'Blanco' %}
                                         <div class="quadrate__container">
                                             <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
                                                 <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                                <input class="colorSection" type="radio" name="color" id="" value="{{n.id}}">
                                             </picture>
                                             <p class="quadrate--p disNoneP">{{n.colores}}</p>    
                                         </div>
-                                        
-                                            
-                                        </picture>
                                         
                                     {% elif n.colores == 'Rojo' %}
                                         <div class="quadrate__container">
                                             <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
                                                 <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                                <input class="colorSection" type="radio" name="color" id="" value="{{n.id}}">
                                             </picture>
                                             <p class="quadrate--p disNoneP">{{n.colores}}</p>    
                                         </div>
-                                        
-                                            
-                                        </picture>
                                         
                                     {% elif n.colores == 'Verde' %}
                                         <div class="quadrate__container">
                                             <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
                                                 <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                                <input class="colorSection" type="radio" name="color" id="" value="{{n.id}}">
                                             </picture>
                                             <p class="quadrate--p disNoneP">{{n.colores}}</p>    
                                         </div>
-                                        
-                                            
-                                        </picture>
                                         
                                     {% elif n.colores == 'Gris' %}
                                         <div class="quadrate__container">
                                             <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
                                                 <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                                <input class="colorSection" type="radio" name="color" id="" value="{{n.id}}">
                                             </picture>
                                             <p class="quadrate--p disNoneP">{{n.colores}}</p>    
                                         </div>
-                                        
-                                            
-                                        </picture>
                                         
                                     {% elif n.colores == 'Rosa' %}
                                         <div class="quadrate__container">
                                             <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
                                                 <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                                <input class="colorSection" type="radio" name="color" id="" value="{{n.id}}">
                                             </picture>
                                             <p class="quadrate--p disNoneP">{{n.colores}}</p>    
                                         </div>
-                                        
-                                            
-                                        </picture>
                                         
                                     {% elif n.colores == 'Purpura' %}
                                         <div class="quadrate__container">
                                             <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
                                                 <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                                <input class="colorSection" type="radio" name="color" id="" value="{{n.id}}">
                                             </picture>
                                             <p class="quadrate--p disNoneP">{{n.colores}}</p>    
                                         </div>
-                                        
-                                            
-                                        </picture>
                                         
                                     {% elif n.colores == 'Naranja' %}
                                         <div class="quadrate__container">
                                             <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
                                                 <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                                <input class="colorSection" type="radio" name="color" id="" value="{{n.id}}">
                                             </picture>
                                             <p class="quadrate--p disNoneP">{{n.colores}}</p>    
                                         </div>
-                                        
-                                            
-                                        </picture>
                                         
                                     {% elif n.colores == 'Amarillo' %}
                                         <div class="quadrate__container">
                                             <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
                                                 <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                                <input class="colorSection" type="radio" name="color" id="" value="{{n.id}}">
                                             </picture>
                                             <p class="quadrate--p disNoneP">{{n.colores}}</p>    
                                         </div>
-                                        
-                                            
-                                        </picture>
                                         
                                     {% elif n.colores == 'Rosa Claro' %}
                                         <div class="quadrate__container">
                                             <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
                                                 <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                                <input class="colorSection" type="radio" name="color" id="" value="{{n.id}}">
                                             </picture>
                                             <p class="quadrate--p disNoneP">{{n.colores}}</p>    
                                         </div>
-                                        
-                                            
-                                        </picture>
                                         
                                     {% elif n.colores == 'Azul Claro' %}
                                         <div class="quadrate__container">
                                             <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
                                                 <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                                <input class="colorSection" type="radio" name="color" id="" value="{{n.id}}">
                                             </picture>
                                             <p class="quadrate--p disNoneP">{{n.colores}}</p>    
                                         </div>
-                                        
-                                            
-                                        </picture>
                                         
                                     {% elif n.colores == 'Palo Rosa' %}
                                         <div class="quadrate__container">
                                             <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
                                                 <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                                <input class="colorSection" type="radio" name="color" id="" value="{{n.id}}">
                                             </picture>
                                             <p class="quadrate--p disNoneP">{{n.colores}}</p>    
                                         </div>
-                                        
-                                            
-                                        </picture>
                                         
                                     {% elif n.colores == 'Marron' %}
                                         <div class="quadrate__container">
                                             <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
                                                 <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                                <input class="colorSection" type="radio" name="color" id="" value="{{n.id}}">
                                             </picture>
                                             <p class="quadrate--p disNoneP">{{n.colores}}</p>    
                                         </div>
-                                        
-                                            
-                                        </picture>
                                         
                                     {% elif n.colores == 'Olivo Oscuro' %}
                                         <div class="quadrate__container">
                                             <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
                                                 <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                                <input class="colorSection" type="radio" name="color" id="" value="{{n.id}}">
                                             </picture>
                                             <p class="quadrate--p disNoneP">{{n.colores}}</p>    
                                         </div>
-                                        
-                                            
-                                        </picture>
                                         
                                     {% elif n.colores == 'Multicolor' %}
                                         <div class="quadrate__container">
                                             <picture class="quadrate" onmouseover="currentSlideP({{forloop.counter}})" onclick="currentSlide({{forloop.counter}})">
                                                 <img  src="{{n.imagen.url}}" alt="imagen-1">
+                                                <input class="colorSection" type="radio" name="color" id="" value="{{n.id}}">
                                             </picture>
                                             <p class="quadrate--p disNoneP">{{n.colores}}</p>    
                                         </div>
-                                        
-                                            
-                                        </picture>
                                         
                                     {% endif %}
                                     
@@ -240,6 +210,7 @@
                             <div class="tallas__container">
                                 {% for o in i.tallas.all %}
                                     <p class="tallas__container--item" onclick="currentSlideT({{forloop.counter}})">{{o.tallas}}</p>
+                                    <input type="radio" class="radioTalla" name="talla" id="" value="{{o.tallas}}">
                                 {% endfor %}
                             </div>
 
@@ -266,14 +237,21 @@
                         {% endif %}
                         <p class="stock">{{i.stock}} disponibles</p>
                         {% if request.user.is_authenticated %}
-                            <a class="btn btn-primary ancho" href="{% url 'tiendaEnLinea:agregarDetalle' i.id%}">
-                                <i class="fa-sharp fa-solid fa-cart-shopping"></i> Agregar al carrito
-                            </a>
-                            
+
+
+
+
+
+
+
+                        <button class="btn btn-primary ancho" type="submit">
+                            <i class="fa-sharp fa-solid fa-cart-shopping"></i> Agregar al carrito
+                        </button>
+
                         {% else %}
                             <h3 class="alert alert-info">Inicia sesión para comprar este producto</h3>
                         {% endif %}
-                    </div >
+                    </form >
                 </div>
             </div>                    
             <div class="info_producto">

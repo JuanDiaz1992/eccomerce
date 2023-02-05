@@ -1,3 +1,4 @@
+
 .wi{
     width: 100%;
 }
@@ -11,7 +12,7 @@ p,h1,h2,h3,h4,h5{
     display: flex;
     border-bottom: 1px solid rgba(0,0,0,.1);
     justify-content: space-evenly;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .carrito__container__picture{
@@ -69,6 +70,10 @@ p,h1,h2,h3,h4,h5{
 
 .costoUnidad{
     padding-left: 20px;
+}
+
+.carrito__Color{
+     margin: 0;
 }
 
 

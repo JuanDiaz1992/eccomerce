@@ -111,3 +111,25 @@ let hover = function(o){
 }
 
 
+let formularioDetalles = document.getElementById("formualioDetalles");
+    formularioDetalles.addEventListener("submit",(e)=>{
+    
+    
+    let colores = document.querySelectorAll('input[name="color"]')
+    if(colores.length == 1 ){
+        colores[0].checked = true
+    }
+    if(!document.querySelector('input[name="talla"]') == "" ){
+        if(!document.querySelector('input[name="talla"]:checked')) {
+            //alert('Error, selecciona una talla');
+            window.alert('Error, selecciona una talla');
+            e.preventDefault()
+            }
+        else{
+            
+        }
+    }
+
+    
+})
+

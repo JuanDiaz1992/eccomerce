@@ -44,7 +44,7 @@
                 <div class="categoria__text--detalle">
                     <h3 class="bg-2 size1">{{i.nombre}}</h3>
                     <p class="bg-3 marca marca_detalle">Por {{i.marca}}</p>
-                    <form class="precio"  method="post" action="/agregarDetalle/">
+                    <form class="precio" id="formualioDetalles" method="post" action="/agregarDetalle/">
                         {% csrf_token %}
                         <input type="hidden" name="id" value="{{i.id}}">
                                                 <!--Color-->

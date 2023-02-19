@@ -14,50 +14,54 @@ def agregar_desde_detalle(request):
     carro = Carro(request)
     if request.method == 'POST':
         id = request.POST['id']
-        producto = Productos.objects.get(id = id)
+        producto = Productos.objects.get(id=id)
         color = request.POST['color']
-        img2 = imagenesProductos.objects.get(id = color)
+        img2 = imagenesProductos.objects.get(id=color)
         img = img2.imagen
         colorProducto = img2.colores
         try:
             talla = request.POST['talla']
         except:
             talla = "Estandar"
-            
+
         try:
-            carro.agregar(producto = producto, imagen = img, color = colorProducto, talla = talla)
-            messages.success(request,"Producto agregado al carrito")
+            carro.agregar(producto=producto, imagen=img, color=colorProducto, talla=talla)
+            messages.success(request, "Producto agregado al carrito")
         except:
-            messages.error(request,"Ya agregaste las existencias disponibles de este producto")
+            messages.error(request, "Ya agregaste las existencias disponibles de este producto")
 
     return redirect('tiendaEnLinea:detail',id) 
+
 
 
 def agregar_producto(request,producto_id):
     img3 = imagenesProductos.objects.filter(producto_id = producto_id)[:1]
     img2 = imagenesProductos.objects.get(id = img3)
     img = img2.imagen
-    color =""
-    talla = ""
+    color = request.POST.get('color', '') # obtener el color seleccionado del POST
+    talla = request.POST.get('talla', '') # obtener la talla seleccionada del POST
     carro = Carro(request)
     producto = Productos.objects.get(id = producto_id)
-    carro.agregar(producto = producto, imagen = img, color = color, talla = talla )
+    carro.agregar(producto=producto, imagen=img, color=color, talla=talla)
     
     return redirect("tiendaEnLinea:mycart")
 
 
 
+
+
 def eliminar_producto(request, producto_id):
     carro = Carro(request)
-    producto = Productos.objects.get(id = producto_id)
-    carro.eliminar(producto = producto)
+    producto = Productos.objects.get(id=producto_id)
+    clave = f"{producto_id}-{request.POST.get('talla')}-{request.POST.get('color')}"
+    carro.eliminar(clave=clave)
     return redirect("tiendaEnLinea:index")
-
 
 def restar_producto(request, producto_id):
     carro = Carro(request)
-    producto = Productos.objects.get(id = producto_id)
-    carro.restar_producto(producto = producto)
+    producto = Productos.objects.get(id=producto_id)
+    clave = f"{producto_id}-{request.POST.get('talla')}-{request.POST.get('color')}"
+    carro.restar_producto(clave=clave)
     return redirect("tiendaEnLinea:mycart")
 
 def limpiar_carro(request):

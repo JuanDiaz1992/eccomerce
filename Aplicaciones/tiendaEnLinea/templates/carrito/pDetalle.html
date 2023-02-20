@@ -12,6 +12,8 @@
                         <div class="tablaInfor_container--titulo">
                             <div>
                                 <p>{{i.producto}}</p>
+                                <p>Color: {{i.color}}</p>
+                                <p>Talla: {{i.talla}}</p>
                                 <p>Cantidad: {{i.cantidad}}</p>
                             </div>
                             <picture class="detalleP__img__container">
@@ -19,18 +21,19 @@
                             </picture>
                         </div>
                         <div>
+
                             {% if i.estadoPedido == 'Aceptado' %}
-                                <p class="color1">{{i.estadoPedido}}</p>
+                                <span>Estado:</span><p class="color1">{{i.estadoPedido}}</p>
                             {% elif i.estadoPedido == 'En proceso' %}
-                                <p class="color2">{{i.estadoPedido}}</p>
+                                <span>Estado:</span><p class="color2">{{i.estadoPedido}}</p>
                             {% elif i.estadoPedido == 'En envío' %}
-                                <p class="color3">{{i.estadoPedido}}</p>
+                                <span>Estado:</span><p class="color3">{{i.estadoPedido}}</p>
                             {% elif i.estadoPedido == 'Pedido entregado' %}
-                                <p class="color4">{{i.estadoPedido}}</p>
+                                <span>Estado:</span><p class="color4">{{i.estadoPedido}}</p>
                             {% elif i.estadoPedido == 'Rechazado' %}
-                                <p class="color5">{{i.estadoPedido}}</p>
+                                <span>Estado:</span><p class="color5">{{i.estadoPedido}}</p>
                             {% else %}
-                                <p class="color1">{{i.estadoPedido}}</p>
+                                <span>Estado:</span><p class="color1">{{i.estadoPedido}}</p>
                             {% endif %}
 
                             <p>Precio por unidad: <span class="precioUnidad">${{i.precioUnidad|intcomma}}</span></p>

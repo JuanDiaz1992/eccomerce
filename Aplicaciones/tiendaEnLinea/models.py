@@ -39,6 +39,13 @@ class Productos(models.Model):
     
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def obtener_imagen(self, color):
+        try:
+            imagen = self.imagenes.get(colores=color).imagen
+        except imagenesProductos.DoesNotExist:
+            imagen = None
+        return imagen
+
 
 
     def __str__(self) -> str:
@@ -60,11 +67,7 @@ class tallaProductos(models.Model):
     tallas = models.CharField(max_length=50, choices= tallas,default= 'Talla Unica')
     producto = models.ForeignKey(Productos, on_delete=models.CASCADE, related_name='tallas')
 
-"""
-class imagenesProductos(models.Model):
-    imagen= models.ImageField(upload_to = 'img/Productos')
-    producto = models.ForeignKey(Productos, on_delete=models.CASCADE, related_name='imagenes')
-"""   
+
 
 class comentariosProductos(models.Model):
     comentario = models.CharField(max_length=250,blank=True,null=True)

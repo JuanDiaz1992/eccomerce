@@ -46,6 +46,8 @@ class LineaPedido(models.Model):
     cantidad = models.IntegerField(default=1)
     precioUnidad= models.IntegerField(default=0)
     subTotal= models.IntegerField(default=0)
+    color = models.CharField(max_length=50, null=True, blank=True)
+    talla = models.CharField(max_length=10, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
 

@@ -116,7 +116,6 @@ def detalle(request,producto_id):
 
 #-------------------------Vista carrito
 def mycart(request):
-    request.session["paypal"] = False
     template_name = 'carrito/carrito.html'
     return render(request,template_name)
 

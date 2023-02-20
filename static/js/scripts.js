@@ -133,3 +133,5 @@ let formularioDetalles = document.getElementById("formualioDetalles");
     
 })
 
+
+

@@ -28,10 +28,10 @@
                                 {% if value.cantidad == value.stock %}
                                     <p class="buttons-item"> </p>
                                 {% else %}
-                                    <a class="buttons-item" href="{% url 'tiendaEnLinea:agregar' value.producto_id %}">+</a>
+                                    <a class="buttons-item" href="{% url 'tiendaEnLinea:agregar' value.producto_id value.color value.talla %}">+</a>
                                 {% endif %}
                                 <h5 class="buttons-item">{{value.cantidad}}</h5>
-                                <a class="buttons-item" href="{% url 'tiendaEnLinea:restar' value.producto_id %}">-</a><br>
+                                <a class="buttons-item" href="{% url 'tiendaEnLinea:restar' value.producto_id value.color value.talla %}">-</a><br>
                             </div>
                             <p class="stockCarty">{{value.stock}} disponibles</p>
                         </div>

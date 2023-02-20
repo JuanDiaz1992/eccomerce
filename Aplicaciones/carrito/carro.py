@@ -4,11 +4,9 @@ class Carro:
         self.request=request
         self.session=request.session
         carro=self.session.get("carro")
-
         if not carro:
             carro=self.session["carro"]={}
         self.carro=carro
-
     def agregar(self,producto,imagen,color,talla):
         clave = f"{producto.id}-{color}-{talla}"
         if clave not in self.carro.keys():
@@ -34,23 +32,22 @@ class Carro:
                     break
             else:
                 messages.error(self.request,"Ya agregaste las existencias disponibles de este producto")
-
         self.guardar_carro()
 
-        
 
-
-
-    def eliminar(self,producto, color, talla):
-        producto_id = str(producto.id) + '_' + color + '_' + talla
-        if producto_id in self.carro:
-            del self.carro[producto_id]
+    def eliminar(self, producto, color, talla):
+        clave = f"{producto.id}-{color}-{talla}"
+        copia_carro = dict(self.carro)
+        for key, value in copia_carro.items():
+            if key == clave:
+                del self.carro[clave]  
         self.guardar_carro()
+
 
     def restar_producto(self,producto, color, talla):
-        producto_id = str(producto.id) + '_' + color + '_' + talla
+        clave = f"{producto.id}-{color}-{talla}"
         for key,value in self.carro.items():
-            if key == producto_id:
+            if key == clave:
                 value["cantidad"] =  value["cantidad"] - 1
                 value["precio"] =  int(value["precio"]) - producto.precio
                 if value["cantidad"] < 1:
@@ -58,23 +55,15 @@ class Carro:
                 break
         self.guardar_carro()
 
+
     def limpiar_carro(self):
         self.session["carro"]={}
         self.session.modified=True
 
-    def guardar_carro(self):
-        self.session["carro"] = self.carro
-        self.session.modified = True
-
-
-
 
 
     def guardar_carro(self):
         self.session["carro"] = self.carro
         self.session.modified = True
-
-    
-
 
 

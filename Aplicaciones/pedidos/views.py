@@ -27,19 +27,21 @@ def procesar_pedido(request):
         form = formEnvio(request.POST)
         if form.is_valid(): 
             pedido = Pedido.objects.create(user = request.user)
-            for key, value in carro.carro.items():
+            for clave, value in carro.carro.items():
+                clave_split = clave.split("-")
+                pro = Productos.objects.get(id=clave_split[0])
+                color = clave_split[1]
+                talla = clave_split[2]
 
                 #datos obtenidos del formulario
-                dir = request.POST.get('direccion')
-                depart = request.POST.get('departamento')
-                ciudad = request.POST.get('ciudad')
-                cel = request.POST.get('celular')
-                cedula= request.POST.get('cedula')
-                comentarios= request.POST.get('comentarios')
-                #-------------------------------------------
+                dir = form.cleaned_data['direccion']
+                depart = form.cleaned_data['departamento']
+                ciudad = form.cleaned_data['ciudad']
+                cel = form.cleaned_data['celular']
+                cedula = form.cleaned_data['cedula']
+                comentarios = form.cleaned_data['comentarios']
 
                 #reducción del stock del producto:
-                pro = Productos.objects.get(id = key)
                 pro.stock = int(pro.stock - value["cantidad"])
                 pro.save()
 
@@ -52,29 +54,34 @@ def procesar_pedido(request):
                 pedido.direccion = dir
                 pedido.departamento = depart
                 pedido.ciudad = ciudad
-                pedido.ordernum = random.randint(10000,99999)
+                pedido.ordernum = random.randint(10000, 99999)
                 pedido.precioTotal = total['importe_total_carro']
                 pedido.comentarios = comentarios
                 pedido.save()
+
                 lineas_pedido.append(LineaPedido(
-                    producto_id = key,
-                    cantidad = value["cantidad"],
-                    precioUnidad = int(value["precioInicial"]),
-                    user = request.user,
-                    pedido = pedido,
-                    subTotal = value["precio"]
+                    producto=pro,
+                    cantidad=value["cantidad"],
+                    precioUnidad=int(value["precioInicial"]),
+                    user=request.user,
+                    pedido=pedido,
+                    subTotal=value["precio"],
+                    color=color,
+                    talla=talla
                 ))
             try:
             #uso de función para envió de correo:
                 LineaPedido.objects.bulk_create(lineas_pedido)
                 enviar_email(
-                    pedido = pedido,
-                    lineas_pedido = lineas_pedido,
-                    nombreusuario = request.user.username,
-                    emailusuario = request.user.email
+                    color=color,
+                    talla=talla,
+                    pedido=pedido,
+                    lineas_pedido=lineas_pedido,
+                    nombreusuario=request.user.username,
+                    emailusuario=request.user.email
                 )
-                carro = Carro(request)
                 carro.limpiar_carro()
+                messages.success(request, '¡Gracias por su compra!')
                 return redirect('tiendaEnLinea:succes')
             except:
                 carro = Carro(request)
@@ -130,7 +137,14 @@ def listaPedidosUsuario(request):
         pedidoUser = paginator.page(page)
     except:
         raise Http404
+    pedidos_con_imagenes = []
+    for pedido in pedidoUser:
+        imagen = pedido.producto.obtener_imagen(pedido.color)
+        pedidos_con_imagenes.append({
+            'imagen': imagen,
+        })
     contex = {
+        'imagen':imagen,
         'entity':pedidoUser,
         'paginator':paginator
 
@@ -145,8 +159,9 @@ def detallePedido(request,pedido_id):
     pedidoDetalle = LineaPedido.objects.filter(pedido_id = pedido_id)
     pedidoF = Pedido.objects.get(id = pedido_id)
     
+    
     contex = {
-        
+
         'pedidoD': pedidoDetalle,
         'fechaCompra': pedidoF.created_at,
         'referencia':pedidoF.ordernum,

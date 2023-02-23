@@ -15,7 +15,7 @@
                         <div class="carrito__containe--nombre">
                             <a href="{% url 'tiendaEnLinea:detail' value.producto_id %}">{{value.nombre}}</a>
                             <p class="carrito__Color">Color: {{value.color}}</p>
-                            {% if value.talla == "Estandar"%}
+                            {% if value.talla == "Talla Unica"%}
                                 
                             {% elif value.talla == "" %}
 

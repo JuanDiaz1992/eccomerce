@@ -9,7 +9,7 @@ from django.utils.html import strip_tags
 from django.core.paginator import Paginator
 from django.http import Http404
 
-from Aplicaciones.tiendaEnLinea.models import Productos
+from Aplicaciones.tiendaEnLinea.models import Productos, tallaProductos
 from Aplicaciones.carrito.carro import Carro
 from Aplicaciones.carrito.context_processor import importe_total_carro
 from .models import Pedido,LineaPedido
@@ -32,7 +32,7 @@ def procesar_pedido(request):
                 pro = Productos.objects.get(id=clave_split[0])
                 color = clave_split[1]
                 talla = clave_split[2]
-
+                talla_stock =  tallaProductos.objects.get(producto = clave_split[0], tallas = clave_split[2])
                 #datos obtenidos del formulario
                 dir = form.cleaned_data['direccion']
                 depart = form.cleaned_data['departamento']
@@ -42,8 +42,8 @@ def procesar_pedido(request):
                 comentarios = form.cleaned_data['comentarios']
 
                 #reducción del stock del producto:
-                pro.stock = int(pro.stock - value["cantidad"])
-                pro.save()
+                talla_stock.stock = int(talla_stock.stock - value["cantidad"])
+                talla_stock.save()
 
                 #procesado de datos para el envío:
                 #dato del costo total de la compra:

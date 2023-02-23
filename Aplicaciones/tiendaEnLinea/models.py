@@ -35,9 +35,14 @@ class Productos(models.Model):
     categoria=models.ForeignKey(Categoria,on_delete=models.CASCADE)
     destacado=models.BooleanField(default=True)
     activo= models.BooleanField(default=True)
-    stock = models.IntegerField(default=1)
+    stock_total = models.IntegerField(default=0)
+
     
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        self.stock_total = sum(talla.stock for talla in self.tallas.all())
+        super().save(*args, **kwargs)
 
     def obtener_imagen(self, color):
         try:
@@ -66,7 +71,12 @@ class imagenesProductos(models.Model):
 class tallaProductos(models.Model):
     tallas = models.CharField(max_length=50, choices= tallas,default= 'Talla Unica')
     producto = models.ForeignKey(Productos, on_delete=models.CASCADE, related_name='tallas')
-
+    stock = models.IntegerField(default=1)
+    
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        self.producto.stock_total = sum(talla.stock for talla in self.producto.tallas.all())
+        self.producto.save()
 
 
 class comentariosProductos(models.Model):

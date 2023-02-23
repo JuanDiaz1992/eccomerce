@@ -18,6 +18,7 @@ def index(request):
     img2 = sliders.objects.all()[1:]
     productos = Productos.objects.filter(activo=True).order_by('categoria')[:15]
     paginate_by = 15
+
     context = {
         "productos": productos,
         "categoria":categoria,

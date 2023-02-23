@@ -4,7 +4,7 @@ from django.contrib import messages
 
 from .carro import Carro
 from Aplicaciones.tiendaEnLinea.models import Categoria
-from Aplicaciones.tiendaEnLinea.models import Productos,imagenesProductos
+from Aplicaciones.tiendaEnLinea.models import Productos,imagenesProductos,tallaProductos
 
 def agregar_desde_detalle(request):
     carro = Carro(request)
@@ -15,12 +15,10 @@ def agregar_desde_detalle(request):
         img2 = imagenesProductos.objects.get(id=color)
         img = img2.imagen
         colorProducto = img2.colores
+        talla = request.POST['talla']
+        stock_talla = tallaProductos.objects.get(producto = id,tallas = talla )
         try:
-            talla = request.POST['talla']
-        except:
-            talla = "Estandar"
-        try:
-            carro.agregar(producto=producto, imagen=img, color=colorProducto, talla=talla)
+            carro.agregar(producto=producto, imagen=img, color=colorProducto, talla=talla, stock = stock_talla.stock)
             messages.success(request, "Producto agregado al carrito")
         except:
             messages.error(request, "Ya agregaste las existencias disponibles de este producto")
@@ -32,11 +30,12 @@ def agregar_producto(request,producto_id,color,talla):
     img3 = imagenesProductos.objects.filter(producto_id = producto_id)[:1]
     img2 = imagenesProductos.objects.get(id = img3)
     img = img2.imagen
+    stock_talla = tallaProductos.objects.get(producto = producto_id,tallas = talla )
     colorITem = color
     tallaItem = talla
     carro = Carro(request)
     producto = Productos.objects.get(id = producto_id)
-    carro.agregar(producto=producto, imagen=img, color=colorITem, talla=tallaItem)
+    carro.agregar(producto=producto, imagen=img, color=colorITem, talla=tallaItem, stock = stock_talla.stock)
     
     return redirect("tiendaEnLinea:mycart")
 

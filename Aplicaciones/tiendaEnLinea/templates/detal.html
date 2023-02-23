@@ -201,20 +201,21 @@
                                     
                                 {% endfor %}
                             </div>
-
                         {% endif %}
                         <!--Talla-->
                         <div class="tallas">
-                            {% if i.tallas.count > 0 %}
                             <h5>Tallas Disponibles:</h5>
                             <div class="tallas__container">
                                 {% for o in i.tallas.all %}
+                                {% if o.tallas == 'Talla Unica' %}
+                                <p class="bg-3 marca marca_detalle">{{o.tallas}}</p>
+                                    <input type="radio" class="radioTalla" name="talla" value="{{o.tallas}}">
+                                {% else %}
                                     <p class="tallas__container--item" onclick="currentSlideT({{forloop.counter}})">{{o.tallas}}</p>
                                     <input type="radio" class="radioTalla" name="talla" id="" value="{{o.tallas}}">
+                                {% endif %}
                                 {% endfor %}
                             </div>
-
-                        {% endif %}
                         </div>
 
 
@@ -235,7 +236,7 @@
                                 <p class="descuento">{{i.descuento}}% OFF</p>
                             </div>
                         {% endif %}
-                        <p class="stock">{{i.stock}} disponibles</p>
+                        <p class="stock">{{i.stock_total}} disponibles</p>
                         {% if request.user.is_authenticated %}
 
 

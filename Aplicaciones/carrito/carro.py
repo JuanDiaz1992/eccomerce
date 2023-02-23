@@ -7,7 +7,7 @@ class Carro:
         if not carro:
             carro=self.session["carro"]={}
         self.carro=carro
-    def agregar(self,producto,imagen,color,talla):
+    def agregar(self,producto,imagen,color,talla,stock):
         clave = f"{producto.id}-{color}-{talla}"
         if clave not in self.carro.keys():
             self.carro[clave]={
@@ -19,7 +19,7 @@ class Carro:
                 "precioSinDescuento": str(producto.PrecioSinDescuento),
                 "cantidad":1,
                 "imagen":imagen.url,
-                "stock": producto.stock,
+                "stock": stock,
                 "color": color,
                 "talla": talla,
                 "descuento":producto.descuento,

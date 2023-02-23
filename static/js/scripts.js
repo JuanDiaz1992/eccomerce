@@ -67,6 +67,10 @@ function showSlides(n){
     
 
 }
+/*******************validacion inputs carrousel*********/
+
+/* Tallas */
+
 
 
 let slideIndexT = 1;
@@ -74,15 +78,18 @@ function currentSlideT(m){
     tallas(slideIndexT = m)
 }
 let tallas = function(m){
-    let i;
     let tallaRadio = document.querySelectorAll(".radioTalla");
     let tallas = document.querySelectorAll(".tallas__container--item") 
+
+
     if(m > tallas.length) slideIndexT = 1
     if(m < 1) slideIndexT = tallas.length
-    for(i=0; i<tallas.length ;i++){
-        tallas[i].className = tallas[i].className.replace("tallaActive","")
+    for(let i=0; i<tallas.length ;i++){
+        tallas[i].className = tallas[i].className.replace("tallaActive","");
+        
+
     }
-    for(i = 0; i < tallaRadio.length;i++){
+    for(let i = 0; i < tallaRadio.length;i++){
         tallaRadio[i].checked = tallaRadio[i].checked=false
     }
 
@@ -91,6 +98,10 @@ let tallas = function(m){
 } 
 
 
+
+
+
+/* Colores */
 
 let slideIndexP = 1
 
@@ -110,9 +121,16 @@ let hover = function(o){
     quadratesP[slideIndexP-1].classList.add("disActivP");
 }
 
+/* Solo un color, selecciona el primero por defecto  */
+
 
 let formularioDetalles = document.getElementById("formualioDetalles");
     formularioDetalles.addEventListener("submit",(e)=>{
+
+    let tallaRadio = document.querySelectorAll(".radioTalla");
+    if (tallaRadio[0].value == "Talla Unica") {
+        tallaRadio[0].checked = true
+        console.log(tallaRadio[0].value)}
     
     
     let colores = document.querySelectorAll('input[name="color"]')

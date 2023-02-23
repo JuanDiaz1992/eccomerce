@@ -54,7 +54,7 @@
             </div>            
             <div class="section2__div__div--articles">
                 {% for i in productos %}
-                    {% if i.stock > 0 %}
+                    {% if i.stock_total > 0 %}
                     <a class="section2__articles section2__articles--item" href="{% url 'tiendaEnLinea:detail' i.id %}">
                         <div class="card__grid flexCard">
                             <picture class="section2__articles__picture">

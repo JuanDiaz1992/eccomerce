@@ -10,6 +10,8 @@ from .forms import formComentario
 
 user = get_user_model()
 
+
+
 #-------------------------Vista del inicio
 def index(request):
     template_name = "index.html"

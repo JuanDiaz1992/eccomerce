@@ -124,19 +124,43 @@ let hover = function(o){
 /* Solo un color, selecciona el primero por defecto  */
 
 
-let formularioDetalles = document.getElementById("formualioDetalles");
-    formularioDetalles.addEventListener("submit",(e)=>{
 
+
+
+/*Ajax*/
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+let botonCaracteristicas = document.getElementById('buttonCaracteristicas')
+botonCaracteristicas.addEventListener("click", function(event) {
+    event.preventDefault();
+
+    /*Si el elemento no incluye talla se envía como Talla Unica*/
     let tallaRadio = document.querySelectorAll(".radioTalla");
     if (tallaRadio[0].value == "Talla Unica") {
         tallaRadio[0].checked = true
-        console.log(tallaRadio[0].value)}
+        }
     
-    
+    /*Si el elemento incluye solo un color y contiene varias imagenes, siempre se selecciona la primer imagen*/
     let colores = document.querySelectorAll('input[name="color"]')
     if(colores.length == 1 ){
         colores[0].checked = true
     }
+    /*Se previene que se envíe el formulario si no ha seleccionado una talla*/
     if(!document.querySelector('input[name="talla"]') == "" ){
         if(!document.querySelector('input[name="talla"]:checked')) {
             //alert('Error, selecciona una talla');
@@ -147,9 +171,69 @@ let formularioDetalles = document.getElementById("formualioDetalles");
             
         }
     }
+    
+    enviarAlCarro();
+
+});
+
+
+
+function enviarAlCarro(callback) {
+
+    let form = new FormData(document.getElementById('formualioDetalles'));
+    let url = `/agregarDetalle/`;
+    fetch(url, {
+        method: 'POST',
+        body: form,
+        headers: {
+            "X-CSRFToken": getCookie('csrftoken'),
+            "X-Requested-With": "XMLHttpRequest"
+        }
+    }).then(
+        function(response){
+            return response.json()
+        }
+    ).then(
+        function(data){
+            let cartNav = document.getElementById("totalCarro") 
+            cartNav.textContent = JSON.stringify(data.data);
+            let producto = JSON.stringify(data.producto);
+            let tallaF = data.talla;
+            let colorF = JSON.stringify(data.color);
+            let talla = (tallaF === "Talla Unica") ? "" : `Talla: ${tallaF}`;
+            let color = (colorF === "No incluye colores") ? "" : `Color: ${colorF}`;
+            let mensaje = data.mensaje
+            console.log(mensaje)
+            if (mensaje) {
+                Swal.fire({
+                    title: "Agregaste correctamente al carrito: ",
+                    text: `${producto} ${talla}, ${color}`.replace(/"/g, "'").replace(/'/g, '') ,
+                    icon: 'success', // o 'error', 'warning', 'info', etc.
+                    confirmButtonText: 'Aceptar'
+                })
+            }else{
+                Swal.fire({
+                    title: "Ya excediste la cantidad disponible de este producto.",
+                    text: `${producto} ${talla}, ${color}`.replace(/"/g, "'").replace(/'/g, '') ,
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                })
+            }
+
+            
+        }
+    )
 
     
-})
 
+}
+
+
+
+
+
+
+
+// Actualiza el número de elementos en el carro en la carga inicial de la página
 
 

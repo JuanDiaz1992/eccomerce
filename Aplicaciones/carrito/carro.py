@@ -31,8 +31,9 @@ class Carro:
                     value["precio"] += producto.precio
                     break
             else:
-                messages.error(self.request,"Ya agregaste las existencias disponibles de este producto")
+                return False
         self.guardar_carro()
+        return True
 
 
     def eliminar(self, producto, color, talla):

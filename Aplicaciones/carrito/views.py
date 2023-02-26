@@ -1,13 +1,19 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib import messages
+from django.http import JsonResponse
+
+from .context_processor import importe_total_carro
 
 from .carro import Carro
 from Aplicaciones.tiendaEnLinea.models import Categoria
 from Aplicaciones.tiendaEnLinea.models import Productos,imagenesProductos,tallaProductos
 
 def agregar_desde_detalle(request):
+
     carro = Carro(request)
+    
+
     if request.method == 'POST':
         id = request.POST['id']
         producto = Productos.objects.get(id=id)
@@ -17,11 +23,25 @@ def agregar_desde_detalle(request):
         colorProducto = img2.colores
         talla = request.POST['talla']
         stock_talla = tallaProductos.objects.get(producto = id,tallas = talla )
-        try:
-            carro.agregar(producto=producto, imagen=img, color=colorProducto, talla=talla, stock = stock_talla.stock)
-            messages.success(request, "Producto agregado al carrito")
-        except:
-            messages.error(request, "Ya agregaste las existencias disponibles de este producto")
+        resultado = carro.agregar(producto=producto, imagen=img, color=colorProducto, talla=talla, stock = stock_talla.stock)
+        if resultado:
+            mensaje = True
+        else:
+            mensaje = False
+            
+        if request.is_ajax():
+            importe = importe_total_carro(request) 
+            context = importe["importe_CantTotal_carro"]
+            data = context
+            
+            return JsonResponse ({
+                'data':data,
+                'producto':str(producto.nombre),
+                'color':colorProducto,
+                'talla': talla,
+                'mensaje': mensaje
+            })
+        
     return redirect('tiendaEnLinea:detail',id) 
 
 

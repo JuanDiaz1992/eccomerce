@@ -46,9 +46,9 @@
             </li>
             <li class="nav-menu-item bag">
                 {% if request.session.carro.items %}
-                    <a  class="padding nav-links " href="/mycart" > <i class="bi bi-cart2 tamanho"></i><p>{{importe_CantTotal_carro|intcomma}}</p> </a>
+                    <a  class="padding nav-links " href="/mycart" > <i class="bi bi-cart2 tamanho"></i><p id="totalCarro">{{importe_CantTotal_carro|intcomma}}</p> </a>
                 {% else %}
-                    <a  class="padding nav-links " href="/mycart" > <i class="bi bi-cart2 tamanho"></i><p>0</p> </a>
+                    <a  class="padding nav-links " href="/mycart" > <i class="bi bi-cart2 tamanho"></i><p id="totalCarro">0</p> </a>
                 {% endif %}
             </li>    
             <!--El usuario no a iniciado sesión-->

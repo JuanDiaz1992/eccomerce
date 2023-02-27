@@ -17,7 +17,7 @@ user = get_user_model()
 #-------------------------Vista del inicio
 def index(request):
     template_name = "index.html"
-    categoria = Categoria.objects.filter(activo=True)[:5]
+    categoria = Categoria.objects.filter(activo=True)
     img1 = sliders.objects.all()[:1]
     img2 = sliders.objects.all()[1:]
     productos = Productos.objects.filter(activo=True).order_by('categoria')[:15]

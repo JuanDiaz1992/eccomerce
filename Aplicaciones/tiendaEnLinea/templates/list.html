@@ -4,9 +4,36 @@
 {% block content %}
     <section class="categoria__section">
         <div class="categoria__section--nombreCategoria">
-            <p>Estas en {{nombreCat}}</p>
+            <p>{{nombreCat}}</p>
+            <form method="GET" action="" id="filtrarProducto" method="post">
+                <div class="form-group">
+                    <label for="genero">Género:</label>
+                    <select class="form-control" id="genero" name="genero">
+                        <option value="todos">Todos</option>
+                        {% for i in sexo %}
+                            <option value="{{i}}">{{i}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Marca:</label>
+                    {% for marca in marcas %}
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="marca" value="{{ marca }}" id="marca-{{ marca }}">
+                            <label class="form-check-label" for="marca-{{ marca }}">
+                                {{ marca }}
+                            </label>
+                        </div>
+                    {% endfor %}
+                </div>
+                <button class="btn btn-primary ancho" type="submit"  id="botonFiltro">
+                    <i class="fa-solid fa-filter"></i> Filtrar
+                </button>
+            </form>
+            
         </div>
         <div class="listado">
+            {% if productos %}
             {% for i in productos %}
             <div class="card">
                 <a href="{% url 'tiendaEnLinea:detail' i.id %}">
@@ -39,13 +66,16 @@
                     </div>
                 </div>
                 </a>
+            
             {% endfor %}  
-            {% for i in productos %}
-            <div>
-                {% empty %}
-                <h4>No hay productos en esta categoria</h4>
-            </div>
-            {% endfor %}  
+            {% else %}
+                <div>
+                    <h4>No hay productos en esta categoria</h4>
+                </div>
+            {% endif %}
+
+
+
 
 
 

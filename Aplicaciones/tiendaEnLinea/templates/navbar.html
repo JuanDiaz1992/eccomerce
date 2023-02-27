@@ -19,8 +19,16 @@
         <li	li class="nav-menu-item">
             <a href="{% url 'tiendaEnLinea:index'%}" class="nav-menu-link nav-links nav-menu-link_active">Home</a>
         </li>
-        <li class="nav-menu-item">
-            <a href="{% url 'tiendaEnLinea:categorias' %}" class="nav-menu-link nav-links ">Categorias</a>
+        <li class="nav-menu-item dropdown hidden-movil">
+            <a href="#" class="nav-menu-link nav-links ">Categorias</a>
+            <div class="dropdown-content">
+                {% for i in categoria %}
+                <a class="cerrarSesion" href="{% url 'tiendaEnLinea:categorias' i.slug %}">{{ i.nombre }}</a>
+            {% endfor %}
+            </div>
+        </li>
+        <li class="nav-menu-item hidden-escritorio">
+            <a class="nav-menu-link nav-links" href="{% url 'tiendaEnLinea:categoriasDisponibles' %}">Categorias</a>
         </li>
         <li class="nav-menu-item">
             <a href="#" class="nav-menu-link nav-links ">Promociones</a>
@@ -32,7 +40,7 @@
                 <div class="dropdown-content">
                     <a class="cerrarSesion" href="{% url 'tiendaEnLinea:ModificarPerfil' %}">Perfil</a>
                     <a class="cerrarSesion" href="{% url 'tiendaEnLinea:listaPedidosUsuario' %}">Pedidos</a>
-                    <a class="cerrarSesion" href="{% url 'tiendaEnLinea:logout' %}">Cerrar Sesión</a>
+                    <a class="cerrarSesion" href="{% url 'tiendaEnLinea:logout' %}">Salir</a>
                 </div>
             </li>
             <li class="nav-menu-item hidden-escritorio">
@@ -42,7 +50,7 @@
                 <a class="nav-menu-link nav-links" href="{% url 'tiendaEnLinea:listaPedidosUsuario' %}">Pedidos</a>
             </li>
             <li class="nav-menu-item hidden-escritorio">
-                <a class="nav-menu-link nav-links" href="{% url 'tiendaEnLinea:logout' %}">Cerrar Sesión</a>
+                <a class="nav-menu-link nav-links" href="{% url 'tiendaEnLinea:logout' %}">Salir</a>
             </li>
             <li class="nav-menu-item bag">
                 {% if request.session.carro.items %}

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
-from django.contrib import messages
+
 from django.http import JsonResponse
 
 from .context_processor import importe_total_carro

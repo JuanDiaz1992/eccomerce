@@ -127,7 +127,7 @@
     background-color: white;
     display: none;
     position: absolute;
-    width: max-content;
+    width: 100%;
     overflow: auto;
     right: 0;
     top: 70px;

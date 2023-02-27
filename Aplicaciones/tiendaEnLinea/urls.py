@@ -3,7 +3,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth.decorators import login_required
 
-from .views import index,buscar_categorias,search,detalle,mycart,categoriasDisponibles
+from .views import index,buscar_categorias,search,detalle,mycart,categoriasDisponibles,filtrarCategoria
 from Aplicaciones.Usuarios.views import Login, LogoutUsuario, register, modificarPerUsuario
 from Aplicaciones.pedidos.views import procesar_pedido,pedidoFinalizado,listaPedidosUsuario,detallePedido
 from Aplicaciones.carrito.views import agregar_producto,eliminar_producto,restar_producto,limpiar_carro,agregar_desde_detalle
@@ -16,9 +16,10 @@ app_name='tiendaEnLinea'
 urlpatterns = [
     path('',index, name= 'index'),
     path('categorias/<slug>',buscar_categorias, name= 'categorias'),
+    path('filtrarCategoria/',filtrarCategoria,name = 'filtrarCategoria' ),
     path('search',search, name= 'search'),
     path('detalle/<int:producto_id>',detalle, name= 'detail'),
-    path('categorias/',categoriasDisponibles, name= 'categorias'),
+    path('categorias/',categoriasDisponibles, name= 'categoriasDisponibles'),
     #carrito
     path('mycart/',login_required(mycart), name= 'mycart'),
     path('agregar/<int:producto_id>/<str:color>/<str:talla>/',login_required(agregar_producto), name= 'agregar'),

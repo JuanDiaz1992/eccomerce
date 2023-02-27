@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
+from django.http import JsonResponse
+from django.core import serializers
 from collections import Counter
 from Aplicaciones.carrito.carro import Carro
 from Aplicaciones.pedidos.models import LineaPedido,Pedido
@@ -45,14 +47,58 @@ def buscar_categorias(request,slug):
     nombre_categoria = Categoria.objects.get(slug = slug)
     categoria = Categoria.objects.filter(activo=True)
     productos = Productos.objects.filter(activo=True,categoria = nombre_categoria)
+    marcas = productos.values_list('marca', flat=True).distinct()
+    sexo = productos.values_list('sexo', flat=True).distinct()
+
     context = {
         "productos": productos,
         "categoria":categoria,
-        "nombreCat":nombre_categoria
+        "nombreCat":nombre_categoria,
+        "marcas":marcas,
+        "sexo":sexo
     }
     return render(request,template_name,context)
 
+
+#-------------------------FiltrarCategoria
+def filtrarCategoria(request):
+    if request.method == 'POST':
+        
+        marcaFiltro = request.POST.get('marca')
+        generoFiltro = request.POST['genero']
+
+        if generoFiltro == "todos":
+            productoFiltrado = Productos.objects.filter(marca=marcaFiltro)
+        elif marcaFiltro is None:
+            productoFiltrado = Productos.objects.filter(sexo=generoFiltro)
+
+        else:
+            productoFiltrado = Productos.objects.filter(marca=marcaFiltro, sexo=generoFiltro)
+        productos = []
+        for producto in productoFiltrado:
+            producto_dict = {
+                'id': producto.id,
+                'codigo': producto.codigo,
+                'nombre': producto.nombre,
+                'marca': producto.marca,
+                'imagen': producto.obtener_imagen(id_producto=producto.id),
+                'precio': producto.precio,
+                'precioSinDescuento':producto.PrecioSinDescuento,
+                'descuento':producto.descuento
+            }
+            productos.append(producto_dict)
+            print(productos)
+
+        
+        if request.is_ajax():
+            return JsonResponse ({
+                'marca':marcaFiltro,
+                'genero':generoFiltro,
+                'productos':productos
+            })
+
 #-------------------------Vista de productos por buscador
+
 def search(request):
     template_name = 'list.html'
     busqueda = request.GET['busqueda']

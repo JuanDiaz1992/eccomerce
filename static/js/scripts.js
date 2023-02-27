@@ -29,7 +29,7 @@ navToggle.addEventListener("click",()=>{
 
 
 //*********************************************************** */
-// Carrousel
+// Carrousel Productos
 
 let slideIndex = 1;
 showSlides(slideIndex)
@@ -127,7 +127,7 @@ let hover = function(o){
 
 
 
-/*Ajax*/
+/*Ajax para selección de producto en detalle */
 
 function getCookie(name) {
     let cookieValue = null;
@@ -231,9 +231,5 @@ function enviarAlCarro(callback) {
 
 
 
-
-
-
-// Actualiza el número de elementos en el carro en la carga inicial de la página
 
 

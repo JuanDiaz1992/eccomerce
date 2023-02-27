@@ -3,7 +3,7 @@ from autoslug import AutoSlugField
 from django.contrib.auth import get_user_model
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from .choices import color,tallas
+from .choices import color,tallas,sexo
 
 
 User = get_user_model()
@@ -36,6 +36,7 @@ class Productos(models.Model):
     destacado=models.BooleanField(default=True)
     activo= models.BooleanField(default=True)
     stock_total = models.IntegerField(default=0)
+    sexo = models.CharField(max_length=20, choices=sexo, default='No definido', blank=True, null=True)
 
     
     created_at = models.DateTimeField(auto_now_add=True)
@@ -44,12 +45,11 @@ class Productos(models.Model):
         self.stock_total = sum(talla.stock for talla in self.tallas.all())
         super().save(*args, **kwargs)
 
-    def obtener_imagen(self, color):
-        try:
-            imagen = self.imagenes.get(colores=color).imagen
-        except imagenesProductos.DoesNotExist:
-            imagen = None
-        return imagen
+    def obtener_imagen(self, id_producto):
+        imagen = self.imagenes.filter(producto_id=id_producto).first()
+        if imagen:
+            return imagen.imagen.url
+        return ''
 
 
 
@@ -72,6 +72,7 @@ class tallaProductos(models.Model):
     tallas = models.CharField(max_length=50, choices= tallas,default= 'Talla Unica')
     producto = models.ForeignKey(Productos, on_delete=models.CASCADE, related_name='tallas')
     stock = models.IntegerField(default=1)
+
     
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

@@ -6,8 +6,8 @@ from django.http import JsonResponse
 from .context_processor import importe_total_carro
 
 from .carro import Carro
-from Aplicaciones.tiendaEnLinea.models import Categoria
-from Aplicaciones.tiendaEnLinea.models import Productos,imagenesProductos,tallaProductos
+from Aplicaciones.tiendaEnLinea.models import Categoria,Productos,Stock
+
 
 def agregar_desde_detalle(request):
 
@@ -18,12 +18,11 @@ def agregar_desde_detalle(request):
         id = request.POST['id']
         producto = Productos.objects.get(id=id)
         color = request.POST['color']
-        img2 = imagenesProductos.objects.get(id=color)
-        img = img2.imagen
-        colorProducto = img2.colores
         talla = request.POST['talla']
-        stock_talla = tallaProductos.objects.get(producto = id,tallas = talla )
-        resultado = carro.agregar(producto=producto, imagen=img, color=colorProducto, talla=talla, stock = stock_talla.stock)
+        stockProducto = Stock.objects.get(colores=color, tallas = talla, producto = id )
+        img = stockProducto.imagen
+        colorProducto = stockProducto.colores
+        resultado = carro.agregar(producto=producto, imagen=img, color=colorProducto, talla=talla, stock = stockProducto.stock)
         if resultado:
             mensaje = True
         else:
@@ -47,15 +46,13 @@ def agregar_desde_detalle(request):
 
 
 def agregar_producto(request,producto_id,color,talla):
-    img3 = imagenesProductos.objects.filter(producto_id = producto_id)[:1]
-    img2 = imagenesProductos.objects.get(id = img3)
+    img3 = Stock.objects.filter(producto_id = producto_id)[:1]
+    img2 = Stock.objects.get(id = img3)
     img = img2.imagen
-    stock_talla = tallaProductos.objects.get(producto = producto_id,tallas = talla )
-    colorITem = color
-    tallaItem = talla
+    stock_talla = Stock.objects.get(producto = producto_id,tallas = talla, colores = color )
     carro = Carro(request)
     producto = Productos.objects.get(id = producto_id)
-    carro.agregar(producto=producto, imagen=img, color=colorITem, talla=tallaItem, stock = stock_talla.stock)
+    carro.agregar(producto=producto, imagen=img, color=color, talla=talla, stock = stock_talla.stock)
     
     return redirect("tiendaEnLinea:mycart")
 

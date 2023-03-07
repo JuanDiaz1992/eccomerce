@@ -43,7 +43,4 @@ urlpatterns = [
     path('detallePedido/<int:pedido_id>',login_required(detallePedido), name = 'detallePedido'),
 
 
-]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

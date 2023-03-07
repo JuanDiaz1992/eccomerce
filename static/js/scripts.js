@@ -29,16 +29,24 @@ navToggle.addEventListener("click",()=>{
 
 
 //*********************************************************** */
+
 // Carrousel Productos
 
+window.addEventListener("load", function(){
+    let primerColorRadio = document.querySelector(".colorSection");
+    primerColorRadio.checked = true;
+    selectTalla(1);
+  });
+
 let slideIndex = 1;
-showSlides(slideIndex)
+showSlides(slideIndex);
 
 function plusSlides(n){
     showSlides(slideIndex += n)
 }
 function currentSlide(n){
     showSlides(slideIndex = n);
+    selectTalla(slideIndex)
 }
 function showSlides(n){
     let i;
@@ -67,36 +75,80 @@ function showSlides(n){
     
 
 }
+let selectTalla = function(o){
+    let colorRadio = document.querySelectorAll(".colorSection");
+    let tallaRadio = document.querySelectorAll(".radioTalla");
+    let pTalla = document.querySelectorAll(".tallas__container--item")
+    let colorSeleccionado = "";
+    for(i = 0; i < colorRadio.length; i++){
+        if(colorRadio[i].checked){
+            colorSeleccionado = colorRadio[i].value;
+            break;
+        }
+    }
+    for(i = 0; i < tallaRadio.length; i++){
+        if(tallaRadio[i].id === colorSeleccionado || tallaRadio[i].id === ""){
+            pTalla[i].classList.add("visible")
+            pTalla[i].classList.remove("oculto")
+        } else {
+            pTalla[i].classList.add("oculto")
+            pTalla[i].classList.remove("visible")
+        }
+    }
+    
+}
+
 /*******************validacion inputs carrousel*********/
 
 /* Tallas */
 
 
 
-let slideIndexT = 1;
-function currentSlideT(m){
-    tallas(slideIndexT = m)
-}
-let tallas = function(m){
-    let tallaRadio = document.querySelectorAll(".radioTalla");
-    let tallas = document.querySelectorAll(".tallas__container--item") 
+let tallasContainer = document.querySelector('.tallas__container');
+tallasContainer.addEventListener('click', function(event) {
+    let clickedElement = event.target;
+    if (clickedElement.classList.contains('tallas__container--item')) {
+        let slideIndexT = 1;
+        let tallaRadio = document.querySelectorAll(".radioTalla");
+        let tallas = document.querySelectorAll(".tallas__container--item");
 
+        for (let i = 0; i < tallas.length; i++) {
+            tallas[i].classList.remove("tallaActive");
+        }
+        for (let i = 0; i < tallaRadio.length; i++) {
+            tallaRadio[i].checked = false;
+        }
 
-    if(m > tallas.length) slideIndexT = 1
-    if(m < 1) slideIndexT = tallas.length
-    for(let i=0; i<tallas.length ;i++){
-        tallas[i].className = tallas[i].className.replace("tallaActive","");
+        clickedElement.classList.add("tallaActive");
+        let index = Array.from(tallas).indexOf(clickedElement);
         
+        tallaRadio[index].checked = true;
+        let tallaSeleccionada = document.querySelector('.radioTalla:checked');
+        let stockP = document.querySelector('#stockP');
+        if (stockP) {
+            if (tallaSeleccionada) {
+              let stock = tallaSeleccionada.getAttribute('data-stock');
+              stockP.textContent =stock + ' disponibles';
+            } else {
+              stockP.textContent = '';
+            }
+          }
 
+        
     }
-    for(let i = 0; i < tallaRadio.length;i++){
-        tallaRadio[i].checked = tallaRadio[i].checked=false
+});
+
+
+/**********Función para ocultar Talla Unica */
+(function() {
+    let firstP = document.querySelector('.tallaUnica:first-of-type');
+    let tituloTallas = document.getElementById("tituloTallas")
+    if (firstP) {
+      firstP.textContent = '';
+      tituloTallas.textContent = ""
     }
-
-    tallas[slideIndexT-1].className += " tallaActive";
-    tallaRadio[slideIndexT-1].checked = true
-} 
-
+  })();
+  
 
 
 
@@ -203,7 +255,6 @@ function enviarAlCarro(callback) {
             let talla = (tallaF === "Talla Unica") ? "" : `Talla: ${tallaF}`;
             let color = (colorF === "No incluye colores") ? "" : `Color: ${colorF}`;
             let mensaje = data.mensaje
-            console.log(mensaje)
             if (mensaje) {
                 Swal.fire({
                     title: "Agregaste correctamente al carrito: ",

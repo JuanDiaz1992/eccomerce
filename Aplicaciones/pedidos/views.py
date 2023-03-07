@@ -9,7 +9,10 @@ from django.utils.html import strip_tags
 from django.core.paginator import Paginator
 from django.http import Http404
 
-from Aplicaciones.tiendaEnLinea.models import Productos, tallaProductos
+
+
+
+from Aplicaciones.tiendaEnLinea.models import Productos,Stock
 from Aplicaciones.carrito.carro import Carro
 from Aplicaciones.carrito.context_processor import importe_total_carro
 from .models import Pedido,LineaPedido
@@ -32,7 +35,7 @@ def procesar_pedido(request):
                 pro = Productos.objects.get(id=clave_split[0])
                 color = clave_split[1]
                 talla = clave_split[2]
-                talla_stock =  tallaProductos.objects.get(producto = clave_split[0], tallas = clave_split[2])
+                talla_stock =  Stock.objects.get(producto = pro.id, tallas = talla, colores =color)
                 #datos obtenidos del formulario
                 dir = form.cleaned_data['direccion']
                 depart = form.cleaned_data['departamento']
@@ -131,21 +134,21 @@ def listaPedidosUsuario(request):
     
     idUsuario = request.user.id
     pedidoUser = LineaPedido.objects.filter(user = idUsuario).order_by("-created_at")
-    page = request.GET.get('page', 1)
-    try:
-        paginator = Paginator(pedidoUser, 5)
-        pedidoUser = paginator.page(page)
-    except:
-        raise Http404
     pedidos_con_imagenes = []
     for pedido in pedidoUser:
-        imagen = pedido.producto.obtener_imagen(pedido.color)
+        imagen = pedido.producto.obtener_imagen(pedido.producto_id,pedido.color, pedido.talla)
         pedidos_con_imagenes.append({
-            'imagen': imagen,
+            'imagen':imagen,
+            'pedido':pedido,
         })
+    page = request.GET.get('page', 1)
+    try:
+        paginator = Paginator(pedidos_con_imagenes, 5)
+        pedidos_con_imagenes = paginator.page(page)
+    except:
+        raise Http404
     contex = {
-        'imagen':imagen,
-        'entity':pedidoUser,
+        'entity':pedidos_con_imagenes,
         'paginator':paginator
 
     }
@@ -158,11 +161,16 @@ def detallePedido(request,pedido_id):
     template_name = "carrito/pDetalle.html"
     pedidoDetalle = LineaPedido.objects.filter(pedido_id = pedido_id)
     pedidoF = Pedido.objects.get(id = pedido_id)
-    
-    
+    pedidos_con_imagenes = []
+    for pedido in pedidoDetalle:
+        imagen = pedido.producto.obtener_imagen(pedido.producto_id,pedido.color, pedido.talla)
+        pedidos_con_imagenes.append({
+            'imagen': imagen,
+            'pedido':pedido
+        })
     contex = {
 
-        'pedidoD': pedidoDetalle,
+        'pedidoD': pedidos_con_imagenes,
         'fechaCompra': pedidoF.created_at,
         'referencia':pedidoF.ordernum,
         'pedidoF':pedidoF.precioTotal,

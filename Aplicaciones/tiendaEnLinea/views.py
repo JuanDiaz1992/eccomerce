@@ -7,7 +7,7 @@ from django.core import serializers
 from collections import Counter
 from Aplicaciones.carrito.carro import Carro
 from Aplicaciones.pedidos.models import LineaPedido,Pedido
-from .models import Categoria,Productos, sliders,comentariosProductos
+from .models import Categoria,Productos, sliders,comentariosProductos,Stock
 from .forms import formComentario
 
 user = get_user_model()
@@ -74,20 +74,22 @@ def filtrarCategoria(request):
 
         else:
             productoFiltrado = Productos.objects.filter(marca=marcaFiltro, sexo=generoFiltro)
+        
         productos = []
         for producto in productoFiltrado:
+            stockImagen = Stock.objects.filter(producto_id = producto.id).first()
             producto_dict = {
                 'id': producto.id,
                 'codigo': producto.codigo,
                 'nombre': producto.nombre,
                 'marca': producto.marca,
-                'imagen': producto.obtener_imagen(id_producto=producto.id),
+                'imagen': stockImagen.imagen.url,
                 'precio': producto.precio,
                 'precioSinDescuento':producto.PrecioSinDescuento,
                 'descuento':producto.descuento
             }
             productos.append(producto_dict)
-            print(productos)
+           
 
         
         if request.is_ajax():
@@ -123,7 +125,37 @@ def detalle(request,producto_id):
         categoria_id = Categoria.objects.get( id=pro_cat_id )
         banner = categoria_id.banner
         comentarios = comentariosProductos.objects.filter(producto_asociado_id = producto_id).order_by('-created_at')
+        stock = Stock.objects.filter(producto = producto_id).values("colores", "tallas", "imagen", "stock")
+        stockObjeto = {}
+        for i in stock:
+            colores = i["colores"]
+            tallas = i["tallas"]
+            imagen = i["imagen"]
+            stock = i["stock"]
+            if colores in stockObjeto:
+                talla_existente = False
+                talla_unica_existente = False
+                for t in stockObjeto[colores]["tallas"]:
+                    if t["talla"] == tallas:
+                        talla_existente = True
+                        break
+                    elif t["talla"] == "Talla Unica":
+                        talla_unica_existente = True
+                if not talla_existente and not (tallas == "Talla Unica" and talla_unica_existente):
+                    stockObjeto[colores]["tallas"].append({
+                        "talla": tallas,
+                        "stock": stock
+                    })
+            else:
+                # Si el color no existe, crearlo y agregar la talla
+                stockObjeto[colores] = {
+                    "imagen": imagen,
+                    "tallas": [{"talla": tallas,
+                                "stock": stock,
+                                                }]
+                }
 
+        print(stockObjeto)    
         if request.user.is_authenticated:
             #filtro para POST
             user = request.user.id
@@ -146,7 +178,8 @@ def detalle(request,producto_id):
                 'categoria':categoria,
                 'banner':banner,
                 'comentarios':comentarios,
-                'form':form
+                'form':form,
+                'stockObjeto':stockObjeto
             }
 
         else:
@@ -158,6 +191,7 @@ def detalle(request,producto_id):
             'banner':banner,
             'form':form,
             'comentarios':comentarios,
+            'stockObjeto':stockObjeto
         }
 
     

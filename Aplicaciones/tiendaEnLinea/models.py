@@ -1,9 +1,10 @@
 from django.db import models
-from autoslug import AutoSlugField
 from django.contrib.auth import get_user_model
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 from .choices import color,tallas,sexo
+from autoslug import AutoSlugField
+import os
+
+
 
 
 User = get_user_model()
@@ -21,6 +22,12 @@ class Categoria (models.Model):
     
     class Meta:
         verbose_name_plural='Categoria'
+    def delete(self, *args, **kwargs):
+        # Eliminar la imagen correspondiente si existe
+        if self.imagen:
+            os.remove(self.imagen.path)
+        super().delete(*args, **kwargs)
+
 
 
 class Productos(models.Model):
@@ -37,21 +44,15 @@ class Productos(models.Model):
     activo= models.BooleanField(default=True)
     stock_total = models.IntegerField(default=0)
     sexo = models.CharField(max_length=20, choices=sexo, default='No definido', blank=True, null=True)
-
-    
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def save(self, *args, **kwargs):
-        self.stock_total = sum(talla.stock for talla in self.tallas.all())
-        super().save(*args, **kwargs)
 
-    def obtener_imagen(self, id_producto):
-        imagen = self.imagenes.filter(producto_id=id_producto).first()
+
+    def obtener_imagen(self,id_producto, color, talla):
+        imagen = self.stock.filter(producto_id = id_producto, colores=color, tallas=talla).first()
         if imagen:
             return imagen.imagen.url
         return ''
-
-
 
     def __str__(self) -> str:
         return self.nombre
@@ -59,25 +60,21 @@ class Productos(models.Model):
     class Meta:
         verbose_name_plural='Producto'
 
-def choiceadapter(enumtype):
-    return ((item.value, item.name.replace('_', ' ')) for item in enumtype)
 
-class imagenesProductos(models.Model):
+class Stock(models.Model):
+    producto = models.ForeignKey(Productos, on_delete=models.CASCADE, related_name='stock')
+    tallas = models.CharField(max_length=50, choices=tallas, default='Talla Unica')
     colores = models.CharField(max_length=50, choices= color,default= '',blank=True,null=True)
-    imagen= models.ImageField(upload_to = 'img/Productos', default='static/img/logo.png', null= True, blank=True)
-    producto = models.ForeignKey(Productos, on_delete=models.CASCADE, related_name='imagenes')
-
-
-class tallaProductos(models.Model):
-    tallas = models.CharField(max_length=50, choices= tallas,default= 'Talla Unica')
-    producto = models.ForeignKey(Productos, on_delete=models.CASCADE, related_name='tallas')
     stock = models.IntegerField(default=1)
+    imagen= models.ImageField(upload_to = 'img/Productos', default='static/img/logo.png', null= True, blank=True)
 
-    
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        self.producto.stock_total = sum(talla.stock for talla in self.producto.tallas.all())
-        self.producto.save()
+    def delete(self, *args, **kwargs):
+        # Eliminar la imagen correspondiente si existe
+        if self.imagen:
+            os.remove(self.imagen.path)
+        super().delete(*args, **kwargs)
+
+
 
 
 class comentariosProductos(models.Model):
@@ -99,17 +96,8 @@ class sliders(models.Model):
 
 
 
-@receiver(post_save, sender=Productos)
-def descuentoFinal(sender,created, **kwargs):
-    codigoTemp = kwargs["instance"]
-    #pro = Productos.objects.get(codigo = codigoTemp.codigo)
-    print(codigoTemp)
-    if created:
-        if codigoTemp.descuento > 0:
-            descuentoF = (codigoTemp.descuento/100)*codigoTemp.precio
-            precioT = codigoTemp.precio - descuentoF
-            codigoTemp.PrecioSinDescuento = codigoTemp.precio
-            codigoTemp.precio = precioT
-            codigoTemp.save()
 
 
+
+def choiceadapter(enumtype):
+    return ((item.value, item.name.replace('_', ' ')) for item in enumtype)

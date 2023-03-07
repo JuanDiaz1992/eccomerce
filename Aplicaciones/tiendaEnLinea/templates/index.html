@@ -58,7 +58,7 @@
                     <a class="section2__articles section2__articles--item" href="{% url 'tiendaEnLinea:detail' i.id %}">
                         <div class="card__grid flexCard">
                             <picture class="section2__articles__picture">
-                                <img src="{{i.imagenes.first.imagen.url}}" alt="imagen">
+                                <img src="{{i.stock.first.imagen.url}}" alt="imagen">
                             </picture>
                             <div>
                                 <h5 class="bg-3 marca">Por {{i.marca}}</h5>

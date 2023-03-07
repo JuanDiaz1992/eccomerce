@@ -18,9 +18,11 @@ from django.urls import path,include
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.conf.urls.static import static
+from django.views.generic.base import RedirectView
 #from Aplicaciones.Usuario.views import Login, LogoutUsuario
 
 urlpatterns = [
+    path('admin', RedirectView.as_view(url='/admin/', permanent=True)),
     path('admin/', admin.site.urls),
     path('', include('Aplicaciones.tiendaEnLinea.urls')),
     #path('accounts/login/',Login.as_view(), name = 'login'),

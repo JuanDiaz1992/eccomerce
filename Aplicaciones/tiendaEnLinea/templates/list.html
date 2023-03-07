@@ -38,7 +38,7 @@
             <div class="card">
                 <a href="{% url 'tiendaEnLinea:detail' i.id %}">
                     <picture class="card__picture--container">
-                        <img class="categoria__imagen" src="{{i.imagenes.first.imagen.url}}" alt="imagen">
+                        <img class="categoria__imagen" src="{{i.stock.first.imagen.url}}" alt="imagen">
                     </picture>
                     
                     <div class="categoria__text">

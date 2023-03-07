@@ -8,43 +8,46 @@
 
                 {% for i in entity %}
                     {% if i in entity %}
+
                         <div class="tablaInfor_container-item">
                             <div>
-                                {{i.created_at}}
+                                <p>Compra realizada en: {{i.pedido.created_at}}</p>
                             </div>
                             <div class="tablaInfor_container-item-second">
                                 <div class="item1">
-                                    <img src="{{i.producto.imagenes.first.imagen.url}}" class="tablaInfor_container-item--img" alt="...">   
-                                    <p>Color: {{i.color}}</p>  
-                                    {% if i.talla == "Estandar"  or i.talla == "Talla Unica" %}    
+                                    
+                                    <img src="{{i.imagen}}" class="tablaInfor_container-item--img" alt="{{i}}">
+
+                                    <p>Color: {{i.pedido.color}}</p>  
+                                    {% if i.pedido.talla == "Estandar"  or i.pedido.talla == "Talla Unica" %}    
 
                                     {% else %}
-                                        <p>Talla: {{i.talla}}</p> 
+                                        <p>Talla: {{i.pedido.talla}}</p> 
                                     {% endif %}
-                                    {% if i.estadoPedido == 'Aceptado' %}
-                                        <p class="color1">{{i.estadoPedido}}</p>
-                                    {% elif i.estadoPedido == 'En proceso' %}
-                                        <p class="color2">{{i.estadoPedido}}</p>
-                                    {% elif i.estadoPedido == 'En envío' %}
-                                        <p class="color3">{{i.estadoPedido}}</p>
-                                    {% elif i.estadoPedido == 'Pedido entregado' %}
-                                        <p class="color4">{{i.estadoPedido}}</p>
-                                    {% elif i.estadoPedido == 'Rechazado' %}
-                                        <p class="color5">{{i.estadoPedido}}</p>
+                                    {% if i.pedido.estadoPedido == 'Aceptado' %}
+                                        <p class="color1">{{i.pedido.estadoPedido}}</p>
+                                    {% elif i.pedido.estadoPedido == 'En proceso' %}
+                                        <p class="color2">{{i.pedido.estadoPedido}}</p>
+                                    {% elif i.pedido.estadoPedido == 'En envío' %}
+                                        <p class="color3">{{i.pedido.estadoPedido}}</p>
+                                    {% elif i.pedido.estadoPedido == 'Pedido entregado' %}
+                                        <p class="color4">{{i.pedido.estadoPedido}}</p>
+                                    {% elif i.pedido.estadoPedido == 'Rechazado' %}
+                                        <p class="color5">{{i.pedido.estadoPedido}}</p>
                                     {% else %}
-                                        <p class="color1">{{i.estadoPedido}}</p>
+                                        <p class="color1">{{i.pedido.estadoPedido}}</p>
                                     {% endif %}
                                     
-                                    <p>{{i.producto}}</p>
+                                    <p>{{i.pedido.producto}}</p>
                                     
-                                    <p>Cantidad total de este producto: {{i.cantidad}}</p>
+                                    <p>Cantidad total de este producto: {{i.pedido.cantidad}}</p>
                                 </div>
                                 <div class="orden">
-                                    <p>Orden numero: {{i.pedido}}</p>
+                                    <p>Orden numero: {{i.pedido.pedido}}</p>
                                     
                                 </div>
                                 
-                                <a class="btn btn-primary" href="{% url 'tiendaEnLinea:detallePedido' i.pedido_id %}">Ver detalle</a>
+                                <a class="btn btn-primary" href="{% url 'tiendaEnLinea:detallePedido' i.pedido.pedido_id %}">Ver detalle</a>
                             </div>
                             
                         </div>

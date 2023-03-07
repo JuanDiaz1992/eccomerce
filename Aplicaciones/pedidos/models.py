@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from Aplicaciones.tiendaEnLinea.models import Productos
+from Aplicaciones.tiendaEnLinea.models import Productos,Stock
 from django.db.models import F,Sum,FloatField
 from .choices import estado
 
@@ -40,6 +40,7 @@ class Pedido(models.Model):
 
 class LineaPedido(models.Model):
     estadoPedido = models.CharField(max_length=50,choices = estado, default = 'Aceptado')
+    comentariosVendedor = models.CharField(max_length=250,blank=True,null=True)
     pedido = models.ForeignKey(Pedido, on_delete= models.CASCADE)
     user = models.ForeignKey(User, on_delete= models.CASCADE)
     producto = models.ForeignKey(Productos, on_delete= models.CASCADE)

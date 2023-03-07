@@ -194,7 +194,12 @@ p{
     opacity: 0; 
     transform: translatey(10px);
 }
-
+.oculto{
+    display: none !important;
+}
+.visible{
+    display: inline;
+}
 .activeC, .quadrate:hover{
     border: 3px solid var(--dorado);
 }
